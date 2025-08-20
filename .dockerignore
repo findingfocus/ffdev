@@ -1,0 +1,8 @@
+frontend/node_modules
+npm-debug.log
+.git
+.github
+.gitignore
+.env
+.env.*
+!.env.example
