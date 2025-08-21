@@ -1,23 +1,38 @@
 <script lang="ts">
 	import '../app.css';
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger } from "flowbite-svelte";
 	import { slide } from "svelte/transition";
 	import { sineIn } from "svelte/easing";
-	import { ChevronDownOutline } from "flowbite-svelte-icons";
+	import { onMount } from 'svelte';
 
 	let { children } = $props();
 
 	const slideParams = { delay: 150, duration: 350, easing: sineIn };
 
+	// Start with hidden true, but we'll update on mount
 	let hidden = $state(true);
 	let dropdownOpen = $state(false);
+	let isMobile = $state(true);
+
+	onMount(() => {
+		// Set initial state based on screen size
+		isMobile = window.innerWidth < 768;
+		hidden = isMobile; // Only hide on mobile initially
+
+		// Optional: Add resize listener to update isMobile state
+		const handleResize = () => {
+			isMobile = window.innerWidth < 768;
+		};
+
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	});
 
 	function toggleMenu() {
 		hidden = !hidden;
 	}
 
 	function handleNavClick() {
-		if (window.innerWidth < 768) { // Only close on mobile
+		if (isMobile) { // Only close on mobile
 			hidden = true;
 		}
 	}
@@ -26,6 +41,7 @@
 		dropdownOpen = false;
 	}
 </script>
+
 
 <div class="flex flex-col min-h-screen w-full relative overflow-hidden">
 	<div class="fixed inset-0 bg-gradient-to-b from-slate-950 via-cyan-950 via-80% to-cyan-850 z-0"></div>
@@ -50,13 +66,12 @@
 						class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
 						onclick={toggleMenu}
 				>
-					<span class="sr-only">Open main menu</span>
 					<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
 						<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
 					</svg>
 				</button>
 
-				{#if !hidden}
+				{#if !hidden || !isMobile}
 					<div transition:slide={slideParams} class="w-full md:block md:w-auto">
 						<ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
 							<li>
@@ -70,6 +85,7 @@
 				{/if}
 			</div>
 		</nav>
+
 	</div>
 
 	<main class="flex-1 relative mx-0 md:mx-10 lg:mx-20 mt-4 md:mt-8 pb-8">
