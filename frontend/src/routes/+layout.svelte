@@ -9,21 +9,41 @@
 
 	let currentPath = $derived(page.url.pathname);
 
-	const slideParams = { delay: 150, duration: 350, easing: sineIn };
+	const slideParams = { delay: 20, duration: 220, easing: sineIn };
 
-	// Start with hidden true, but we'll update on mount
-	let hidden = $state(true);
-	let dropdownOpen = $state(false);
-	let isMobile = $state(true);
+	// Default collapsed state
+	let menuOpen = $state(false);
+	let isMobile = $state(true); // Assume mobile by default
+	let mounted = $state(false);
+	let isResizing = $state(false); // Track if changes are from resize
 
 	onMount(() => {
-		// Set initial state based on screen size
+		// Check if we're on mobile
 		isMobile = window.innerWidth < 768;
-		hidden = isMobile; // Only hide on mobile initially
 
-		// Optional: Add resize listener to update isMobile state
+		// Set initial menu state based on screen size
+		menuOpen = !isMobile;
+
+		mounted = true;
+
 		const handleResize = () => {
+			isResizing = true;
+			const wasMobile = isMobile;
 			isMobile = window.innerWidth < 768;
+
+			// When changing from mobile to desktop, open menu
+			if (wasMobile && !isMobile) {
+				menuOpen = true;
+			}
+			// When changing from desktop to mobile, close menu
+			else if (!wasMobile && isMobile) {
+				menuOpen = false;
+			}
+
+			// Reset resize flag after a short delay
+			setTimeout(() => {
+				isResizing = false;
+			}, 50);
 		};
 
 		window.addEventListener('resize', handleResize);
@@ -31,17 +51,13 @@
 	});
 
 	function toggleMenu() {
-		hidden = !hidden;
+		menuOpen = !menuOpen;
 	}
 
 	function handleNavClick() {
-		if (isMobile) { // Only close on mobile
-			hidden = true;
+		if (isMobile) {
+			menuOpen = false;
 		}
-	}
-
-	function closeDropdown() {
-		dropdownOpen = false;
 	}
 </script>
 
@@ -59,11 +75,11 @@
 		<div class="h-[0.2em] w-full bg-gradient-to-t from-[#2b4f6e] to-[#335b7f] md:hidden"></div>
 	</div>
 
-	<!-- Position the navbar separately -->
+<!--	NAVBAR-->
 	<nav class="fixed md:sticky bottom-0 md:top-0 left-0 w-full z-20 text-white text-center bg-gradient-to-b from-[#496D8E] to-[#1e3a53] rounded md:rounded-none">
 		<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-0">
-			<div class="ml-4 md:mx-12 text-[1.1em] font-['Arial']">Paul Thompson | Software Engineer</div>
-<!--			<div></div> &lt;!&ndash; Empty div to push hamburger to right &ndash;&gt;-->
+			<div class="ml-4 md:mx-12 text-[1.1em] font-['Arial'] md:hidden">Paul Thompson | Software Engineer</div>
+			<!-- Mobile menu toggle button - only visible on mobile -->
 			<button
 					aria-label="Toggle navigation menu"
 					class="inline-flex items-center my-1 mx-1 w-10 h-10 justify-center text-sm text-[#a9c4de] rounded-lg md:hidden hover:bg-[#2d4d6e] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#496D8E] border-none float-right transition-colors duration-300"
@@ -74,25 +90,66 @@
 				</svg>
 			</button>
 
-			{#if !hidden || !isMobile}
-				<div transition:slide={slideParams} class="w-full md:block md:w-auto transition-height duration-[450ms] ease-in-out">
-					<ul class="font-medium flex flex-col mt-2 md:mt-0 md:flex-row md:space-x-0 md:mt-0 md:border-0">
-						<li>
-							<a href="/"
-							   onclick={handleNavClick}
-							   class="block pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 md:p-4 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
-							>Home</a>
-						</li>
-						<li>
-							<a href="/interactive-art"
-							   onclick={handleNavClick}
-							   class="block py-2 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 md:p-4 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
-							>Interactive Art</a>
-						</li>
-					</ul>
+			<!-- Desktop menu (always visible, no animation) -->
+			<div class="hidden md:block md:w-auto">
+				<ul class="font-medium flex flex-col md:flex-row md:space-x-0 md:mt-0 md:border-0">
+					<li>
+						<a href="/"
+						   class="block pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 md:p-4 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
+						>Home</a>
+					</li>
+					<li>
+						<a href="/interactive-art"
+						   class="block py-2 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 md:p-4 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
+						>Interactive Art</a>
+					</li>
+				</ul>
+			</div>
 
-				</div>
-			{/if}
+			<!-- Mobile menu -->
+			<div class="w-full md:hidden">
+				{#if mounted && !isResizing}
+					<!-- Animated mobile menu when not resizing -->
+					{#if menuOpen}
+						<div transition:slide={slideParams}>
+							<ul class="font-medium flex flex-col mt-2">
+								<li>
+									<a href="/"
+									   onclick={handleNavClick}
+									   class="block pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
+									>Home</a>
+								</li>
+								<li>
+									<a href="/interactive-art"
+									   onclick={handleNavClick}
+									   class="block py-2 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
+									>Interactive Art</a>
+								</li>
+							</ul>
+						</div>
+					{/if}
+				{:else if mounted && isResizing}
+					<!-- Non-animated mobile menu during resize -->
+					{#if menuOpen}
+						<div>
+							<ul class="font-medium flex flex-col mt-2">
+								<li>
+									<a href="/"
+									   onclick={handleNavClick}
+									   class="block pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
+									>Home</a>
+								</li>
+								<li>
+									<a href="/interactive-art"
+									   onclick={handleNavClick}
+									   class="block py-2 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
+									>Interactive Art</a>
+								</li>
+							</ul>
+						</div>
+					{/if}
+				{/if}
+			</div>
 		</div>
 	</nav>
 
