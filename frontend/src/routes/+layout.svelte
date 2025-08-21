@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 	import { slide } from "svelte/transition";
-	import { sineIn } from "svelte/easing";
+	import {linear} from "svelte/easing";
 	import { onMount } from 'svelte';
 	import {page} from "$app/state";
 
@@ -9,7 +9,7 @@
 
 	let currentPath = $derived(page.url.pathname);
 
-	const slideParams = { delay: 20, duration: 220, easing: sineIn };
+	const slideParams = { delay: 100, duration: 300, easing: linear };
 
 	// Default collapsed state
 	let menuOpen = $state(false);
@@ -61,6 +61,11 @@
 			menuOpen = false;
 		}
 	}
+
+	function handleVideoLoad() {
+		document.getElementById('videoPlaceholder').style.display = 'none';
+	}
+
 </script>
 
 <svelte:head>
@@ -82,6 +87,13 @@
 	<div class="mx-auto mt-0 z-15 w-full">
 		<!-- Container with aspect ratio placeholder that maintains space -->
 		<div class="relative w-full max-w-[1100px] mx-auto" style="aspect-ratio: 5/1;">
+			<img
+					src="/images/MATRIX001.png"
+					id="videoPlaceholder"
+					class="absolute top-0 left-0 w-full h-full object-cover"
+					alt="Video preview"
+			/>
+
 			<!-- Video positioned absolutely to fill the container -->
 			<video
 					class="absolute top-0 left-0 w-full h-full object-cover"
@@ -115,7 +127,7 @@
 			</button>
 
 			<!-- Desktop menu (always visible, no animation) -->
-			<div class="hidden md:block md:w-auto">
+			<div class="hidden md:block md:w-auto ml-20">
 				<ul class="font-medium flex flex-col md:flex-row md:space-x-0 md:mt-0 md:border-0">
 					<li>
 						<a href="/"
@@ -124,8 +136,23 @@
 					</li>
 					<li>
 						<a href="/interactive-art"
-						   class="block py-2 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 md:p-4 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
+						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
 						>Interactive Art</a>
+					</li>
+					<li>
+						<a href="/programming"
+						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
+						>Programming</a>
+					</li>
+					<li>
+						<a href="/coding-streams"
+						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
+						>Coding Streams</a>
+					</li>
+					<li>
+						<a href="/contact"
+						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/contact' ? 'text-white' : ''}"
+						>Contact Me</a>
 					</li>
 				</ul>
 			</div>
@@ -140,14 +167,32 @@
 								<li>
 									<a href="/"
 									   onclick={handleNavClick}
-									   class="block pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
+									   class="block py-3 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
 									>Home</a>
 								</li>
 								<li>
 									<a href="/interactive-art"
 									   onclick={handleNavClick}
-									   class="block py-2 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
+									   class="block py-3 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
 									>Interactive Art</a>
+								</li>
+								<li>
+									<a href="/programming"
+									   onclick={handleNavClick}
+									   class="block py-3 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
+									>Programming</a>
+								</li>
+								<li>
+									<a href="/coding-streams"
+									   onclick={handleNavClick}
+									   class="block py-3 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
+									>Coding Streams</a>
+								</li>
+								<li>
+									<a href="/contact"
+									   onclick={handleNavClick}
+									   class="block py-3 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/contact' ? 'text-white' : ''}"
+									>Contact Me</a>
 								</li>
 							</ul>
 						</div>
@@ -177,7 +222,7 @@
 		</div>
 	</nav>
 
-	<main class="flex-1 relative mx-4 md:mx-10 lg:mx-20 mt-4 md:mt-8 pb-8 text-left text-white">
+	<main class="flex-1 relative mx-4 md:mx-10 lg:mx-30 mt-2 md:mt-4 pb-8 text-left text-white">
 		{@render children()}
 	</main>
 </div>
