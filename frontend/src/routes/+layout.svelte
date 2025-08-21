@@ -18,6 +18,8 @@
 	let isResizing = $state(false); // Track if changes are from resize
 
 	onMount(() => {
+		document.documentElement.style.backgroundColor = "#2b4f6e";
+		document.body.style.backgroundColor = "#2b4f6e";
 		// Check if we're on mobile
 		isMobile = window.innerWidth < 768;
 
@@ -61,17 +63,39 @@
 	}
 </script>
 
+<svelte:head>
+	<style>
+		/* Ensure the background color is set from the start */
+		:root, html, body {
+			background-color: #070F26;
+		}
+	</style>
+</svelte:head>
+
 <div class="flex flex-col min-h-screen w-full relative overflow-hidden text-right">
 	<img
 			src="/images/sandias.png"
 			alt="Sandias Mountains"
 			class="fixed top-0 left-0 w-full h-screen object-cover bg-fixed bg-left bg-no-repeat z-0 brightness-[0.4] contrast-[1.1] saturate-[0.9]"/>
-	<div class="mx-auto mt-0 z-15">
-		<video class="mx-auto w-full max-w-full object-contain" preload="auto" playsinline autoplay loop muted>
-			<source src="/video/Banner-HEVC.mov" type="video/mp4; codecs=hvc1">
-			<source src="/video/Banner-VP9.webm" type="video/webm">
-			Your browser does not support the video tag.
-		</video>
+
+	<!-- Video container with aspect ratio preservation -->
+	<div class="mx-auto mt-0 z-15 w-full">
+		<!-- Container with aspect ratio placeholder that maintains space -->
+		<div class="relative w-full max-w-[1100px] mx-auto" style="aspect-ratio: 5/1;">
+			<!-- Video positioned absolutely to fill the container -->
+			<video
+					class="absolute top-0 left-0 w-full h-full object-cover"
+					preload="auto"
+					playsinline
+					autoplay
+					loop
+					muted
+			>
+				<source src="/video/Banner-HEVC.mov" type="video/mp4; codecs=hvc1">
+				<source src="/video/Banner-VP9.webm" type="video/webm">
+				Your browser does not support the video tag.
+			</video>
+		</div>
 		<div class="h-[0.2em] w-full bg-gradient-to-t from-[#2b4f6e] to-[#335b7f] md:hidden"></div>
 	</div>
 
