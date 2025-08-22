@@ -127,7 +127,7 @@
 			</button>
 
 			<!-- Desktop menu (always visible, no animation) -->
-			<div class="hidden md:block md:w-auto ml-10 lg:ml-20">
+			<div class="hidden md:block md:w-auto ml-10 lg:ml-30">
 				<ul class="font-medium flex flex-col md:flex-row md:space-x-0 md:mt-0 md:border-0">
 					<li>
 						<a href="/"
@@ -222,7 +222,7 @@
 		</div>
 	</nav>
 
-	<main class="flex-1 relative mx-4 md:mx-10 lg:mx-20 mt-2 md:mt-4 pb-8 text-left text-white">
+	<main class="flex-1 relative mx-4 md:mx-10 lg:mx-30 mt-2 md:mt-4 pb-8 text-left text-white">
 		{@render children()}
 	</main>
 </div>
