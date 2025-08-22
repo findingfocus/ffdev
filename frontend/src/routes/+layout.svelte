@@ -65,7 +65,6 @@
 	function handleVideoLoad() {
 		document.getElementById('videoPlaceholder').style.display = 'none';
 	}
-
 </script>
 
 <svelte:head>
@@ -77,13 +76,13 @@
 	</style>
 </svelte:head>
 
-<div class="flex flex-col min-h-screen w-full relative overflow-hidden text-right">
+<div class="flex flex-col min-h-screen w-full relative overflow-hidden text-right z-0">
 	<img
 			src="/images/sandias.png"
 			alt="Sandias Mountains"
-			class="fixed top-0 left-0 w-full h-screen object-cover bg-fixed bg-left bg-no-repeat z-0 brightness-[0.4] contrast-[1.1] saturate-[0.9]"/>
+			class="fixed top-0 left-0 w-full h-screen object-cover bg-fixed bg-left bg-no-repeat z-0 inset-0 bg-[#0a1b4d]/60 mix-blend-multiply">
+	<div class="absolute inset-0 bg-[#0a1b4d]/75"></div>
 
-	<!-- Video container with aspect ratio preservation -->
 	<div class="mx-auto mt-0 z-15 w-full">
 		<!-- Container with aspect ratio placeholder that maintains space -->
 		<div class="relative w-full max-w-[1100px] mx-auto" style="aspect-ratio: 5/1;">
@@ -114,7 +113,7 @@
 <!--	NAVBAR-->
 	<nav class="fixed md:sticky bottom-0 md:top-0 left-0 w-full z-20 text-white bg-gradient-to-b from-[#496D8E] to-[#1e3a53] rounded md:rounded-none">
 		<div class="max-w-screen-xl flex flex-wrap items-center justify-between">
-			<div class="ml-4 md:mx-12 text-[1.1em] font-['Arial'] md:hidden">Paul Thompson | Software Engineer</div>
+			<div class="ml-4 md:mx-12 text-[1em] font-['Arial'] md:hidden">Paul Thompson | Software Engineer</div>
 			<!-- Mobile menu toggle button - only visible on mobile -->
 			<button
 					aria-label="Toggle navigation menu"
@@ -131,27 +130,27 @@
 				<ul class="font-medium flex flex-col md:flex-row md:space-x-0 md:mt-0 md:border-0">
 					<li>
 						<a href="/"
-						   class="block pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 md:p-4 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
+						   class="block pl-3 pr-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] p-2 md:p-4 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
 						>Home</a>
 					</li>
 					<li>
 						<a href="/interactive-art"
-						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
+						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
 						>Interactive Art</a>
 					</li>
 					<li>
 						<a href="/programming"
-						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
+						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
 						>Programming</a>
 					</li>
 					<li>
 						<a href="/coding-streams"
-						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
+						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
 						>Coding Streams</a>
 					</li>
 					<li>
 						<a href="/contact"
-						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/contact' ? 'text-white' : ''}"
+						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/contact' ? 'text-white' : ''}"
 						>Contact Me</a>
 					</li>
 				</ul>
@@ -167,31 +166,31 @@
 								<li>
 									<a href="/"
 									   onclick={handleNavClick}
-									   class="block py-3 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
+									   class="block py-2.5 pl-3 pr-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
 									>Home</a>
 								</li>
 								<li>
 									<a href="/interactive-art"
 									   onclick={handleNavClick}
-									   class="block py-3 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
+									   class="block py-2.5 pl-3 pr-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
 									>Interactive Art</a>
 								</li>
 								<li>
 									<a href="/programming"
 									   onclick={handleNavClick}
-									   class="block py-3 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
+									   class="block py-2.5 pl-3 pr-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
 									>Programming</a>
 								</li>
 								<li>
 									<a href="/coding-streams"
 									   onclick={handleNavClick}
-									   class="block py-3 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
+									   class="block py-2.5 pl-3 pr-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
 									>Coding Streams</a>
 								</li>
 								<li>
 									<a href="/contact"
 									   onclick={handleNavClick}
-									   class="block py-3 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/contact' ? 'text-white' : ''}"
+									   class="block py-2.5 pl-3 pr-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/contact' ? 'text-white' : ''}"
 									>Contact Me</a>
 								</li>
 							</ul>
@@ -205,13 +204,13 @@
 								<li>
 									<a href="/"
 									   onclick={handleNavClick}
-									   class="block pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
+									   class="block pl-3 pr-4 text-gray-300 text-right leading-none font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
 									>Home</a>
 								</li>
 								<li>
 									<a href="/interactive-art"
 									   onclick={handleNavClick}
-									   class="block py-2 pl-3 pr-4 text-gray-300 text-right leading-none text-[1.1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
+									   class="block py-2.5 pl-3 pr-4 text-gray-300 text-right leading-none font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
 									>Interactive Art</a>
 								</li>
 							</ul>
@@ -222,7 +221,10 @@
 		</div>
 	</nav>
 
-	<main class="flex-1 relative mx-4 md:mx-10 lg:mx-30 mt-2 md:mt-4 pb-8 text-left text-white">
-		{@render children()}
+	<main class="flex-1 relative z-10">
+		<div class="absolute inset-0 bg-[rgba(8,15,40,0.6)] mix-blend-multiply pointer-events-none -top[100vh] saturate-60"></div>
+		<div class="relative z-10 mx-2.5 md:mx-12 lg:mx-30 mt-2 md:mt-4 pb-8 text-left text-white">
+			{@render children()}
+		</div>
 	</main>
 </div>
