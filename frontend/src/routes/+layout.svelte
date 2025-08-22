@@ -80,8 +80,8 @@
 	<img
 			src="/images/sandias.png"
 			alt="Sandias Mountains"
-			class="fixed top-0 left-0 w-full h-screen object-cover bg-fixed bg-left bg-no-repeat z-0 inset-0 bg-[#0a1b4d]/60 mix-blend-multiply">
-	<div class="absolute inset-0 bg-[#0a1b4d]/75"></div>
+			class="fixed top-0 left-0 w-full h-[105vh] object-cover bg-fixed bg-left bg-no-repeat z-0 inset-0 bg-[#0a1b4d]/60 mix-blend-multiply md:translate-y-0 -translate-y-18">
+	<div class="absolute inset-0 bg-[#0a1b4d]/70"></div>
 
 	<div class="mx-auto mt-0 z-15 w-full">
 		<!-- Container with aspect ratio placeholder that maintains space -->
@@ -130,27 +130,27 @@
 				<ul class="font-medium flex flex-col md:flex-row md:space-x-0 md:mt-0 md:border-0">
 					<li>
 						<a href="/"
-						   class="block pl-3 pr-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] p-2 md:p-4 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
+						   class="block pl-3 pr-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] p-2 md:p-4 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
 						>Home</a>
 					</li>
 					<li>
 						<a href="/interactive-art"
-						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
+						   class="block pr-4 md:p-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
 						>Interactive Art</a>
 					</li>
 					<li>
 						<a href="/programming"
-						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
+						   class="block pr-4 md:p-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
 						>Programming</a>
 					</li>
 					<li>
 						<a href="/coding-streams"
-						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
+						   class="block pr-4 md:p-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
 						>Coding Streams</a>
 					</li>
 					<li>
 						<a href="/contact"
-						   class="block pr-4 md:p-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/contact' ? 'text-white' : ''}"
+						   class="block pr-4 md:p-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/contact' ? 'text-white' : ''}"
 						>Contact Me</a>
 					</li>
 				</ul>
@@ -166,31 +166,31 @@
 								<li>
 									<a href="/"
 									   onclick={handleNavClick}
-									   class="block py-2.5 pl-3 pr-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
+									   class="block py-2.5 pl-3 pr-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
 									>Home</a>
 								</li>
 								<li>
 									<a href="/interactive-art"
 									   onclick={handleNavClick}
-									   class="block py-2.5 pl-3 pr-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
+									   class="block py-2.5 pl-3 pr-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
 									>Interactive Art</a>
 								</li>
 								<li>
 									<a href="/programming"
 									   onclick={handleNavClick}
-									   class="block py-2.5 pl-3 pr-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
+									   class="block py-2.5 pl-3 pr-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
 									>Programming</a>
 								</li>
 								<li>
 									<a href="/coding-streams"
 									   onclick={handleNavClick}
-									   class="block py-2.5 pl-3 pr-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
+									   class="block py-2.5 pl-3 pr-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
 									>Coding Streams</a>
 								</li>
 								<li>
 									<a href="/contact"
 									   onclick={handleNavClick}
-									   class="block py-2.5 pl-3 pr-4 text-gray-300 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/contact' ? 'text-white' : ''}"
+									   class="block py-2.5 pl-3 pr-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/contact' ? 'text-white' : ''}"
 									>Contact Me</a>
 								</li>
 							</ul>
@@ -222,7 +222,7 @@
 	</nav>
 
 	<main class="flex-1 relative z-10">
-		<div class="absolute inset-0 bg-[rgba(8,15,40,0.6)] mix-blend-multiply pointer-events-none -top[100vh] saturate-60"></div>
+		<div class="absolute inset-0 bg-[rgba(8,15,50,0.65)] mix-blend-multiply pointer-events-none -top[100vh] saturate-60"></div>
 		<div class="relative z-10 mx-2.5 md:mx-12 lg:mx-30 mt-2 md:mt-4 pb-8 text-left text-white">
 			{@render children()}
 		</div>
