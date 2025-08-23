@@ -1,12 +1,12 @@
 <div class="container mx-auto mb-8">
-    <h2 class="text-xl font-bold mb-2">Game Development Streams</h2>
+    <h2 class="text-xl font-bold">Game Development Streams</h2>
 
     <div class="mb-6">
-        <p class="mb-4">Watch me program my new game live on twitch:
+        <p class="mb-3">Watch me program my new game live on twitch:
             <a href="https://twitch.tv/findingfocusdev" class="inline-block px-3 py-2 bg-purple-800 text-white font-medium rounded-md shadow-md  hover:bg-purple-900 transition duration-300">Twitch</a>
         </p>
 
-        <p class="mb-4">Visit my YouTube channel for all my coding streams:
+        <p class="mb-3">Visit my YouTube channel for all my coding streams:
             <a href="https://youtube.com/findingfocus" class="inline-block px-3 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white font-medium rounded-md shadow-md hover:from-red-700 hover:to-red-800 transition duration-300">YouTube</a>
         </p>
 
