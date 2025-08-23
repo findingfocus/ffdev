@@ -8,7 +8,7 @@
     let filesizeValue = $state(1024);
     let filesizeUnit = $state("MB");
     let filesize = $state(1024);
-    let bitrateResult = $state("Bitrate: 0.00 Mbps");
+    let bitrateResult = $state("Bitrate is 0.00 Mbps");
 
     // Max values
     const MAX_HOURS = 5;
@@ -71,18 +71,18 @@
 </script>
 
 
-<h3><b>No Concessions</b></h3>
+<h2 class="text-xl font-bold mb-2">No Concessions</h2>
 <p>I recently deployed a web application called <a class="text-cyan-500 hover:text-cyan-400" href="http://noconcessions.xyz" target="_blank" rel="noopener noreferrer">No Concessions</a> that allows users to find new movies based on shared taste with other users.</p>
 <p>The application was built with React, TypeScript, Express, Tailwind, PostgreSQL, and Docker.</p>
 <br>
-<h3><b>Finding Focus Comic Strip</b></h3>
+<h2 class="text-xl font-bold mb-2">Comic Strip</h2>
 <p>I host my comics on my art website <a class="text-cyan-500 hover:text-cyan-400" href="https://findingfocus.art" target="_blank" rel="noopener noreferrer">findingfocus.art</a></p>
 <p>The site is built using React, TypeScript, Tailwind, and Nginx with pm2 as the process manager. I have over 200 more comics still needing to be exported and added to the site.</p>
 <br>
-<h3><b>Bitrate Calculator</b></h3>
+<h2 class="text-xl font-bold mb-2">Bitrate Calculator</h2>
 Enter the duration and filesize of a video to calculate its bitrate with this web application. I use this for analyzing old videos and estimating filesizes for exports.
 <br>
-<Card class="p-6 pt-3 max-w-xl mx-auto bg-gray-900 border border-blue-800/30 shadow shadow-blue-900/20 dark:bg-gray-900 dark:border-blue-800/20 mb-8 mt-4">
+<Card class="mt-3 bg-gray-900 border border-blue-800/30 shadow shadow-blue-900/20 p-6 max-w-xl mx-auto rounded-xl">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div class="time-input">
             <label for="hourSlider" class="block mb-2 text-sm font-medium text-indigo-50">
@@ -130,13 +130,13 @@ Enter the duration and filesize of a video to calculate its bitrate with this we
         </div>
     </div>
 
-    <div class="time-display mb-6 text-center text-xl">
-        <span class="font-semibold">Total Duration:</span>
+    <div class="time-display mb-6 text-center text-xl font-semibold text-blue-100">
+        <span>Total Duration:</span>
         {hours.toString().padStart(2, '0')}:{minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
     </div>
 
     <div class="filesize-input-group mb-6">
-        <label for="filesizeInput" class="block mb-2 text-sm font-medium text-indigo-50">Filesize:</label>
+        <label for="filesizeInput" class="block mb-2 text-sm font-medium text-gray-200">Filesize:</label>
         <div class="flex items-center gap-2">
             <input
                     type="number"
@@ -146,12 +146,12 @@ Enter the duration and filesize of a video to calculate its bitrate with this we
                     max={filesizeUnit === "GB" ? MAX_FILESIZE_GB : MAX_FILESIZE_MB}
                     step={filesizeUnit === "GB" ? "0.01" : "1"}
                     bind:value={filesizeValue}
-                    class="bg-gray-50 border border-gray-300 text-indigo-950 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    class="bg-gray-800 border border-gray-600 text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#335b7f] focus:border-[#335b7f] block w-full p-2.5"
             >
             <select
                     bind:value={filesizeUnit}
                     onchange={handleUnitChange}
-                    class="bg-gray-50 border border-gray-300 text-indigo-950 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
+                    class="bg-gray-800 border border-gray-600 text-gray-200 text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-[#335b7f] focus:border-[#335b7f] p-2.5"
             >
                 <option value="MB">MB</option>
                 <option value="GB">GB</option>
@@ -159,64 +159,75 @@ Enter the duration and filesize of a video to calculate its bitrate with this we
         </div>
     </div>
 
-    <div class="result-display p-4 bg-blue-50 border border-blue-200 rounded-lg text-center">
-        <p class="text-lg font-semibold text-blue-900">{bitrateResult}</p>
+    <div class="result-display rounded-lg text-center">
+        <p class="text-lg font-semibold text-blue-100">{bitrateResult}</p>
     </div>
 </Card>
 
 <style>
+    /* Custom slider styling for larger thumb (the ball) */
     .slider-custom {
         -webkit-appearance: none;
         appearance: none;
-        height: 10px;
+        height: 8px;
         outline: none;
-        border-radius: 10px;
+        border-radius: 8px;
         margin: 10px 0;
         width: 100%;
-        background: #d1d5dc;
     }
 
+    /* Chrome, Safari, Edge, Opera */
     .slider-custom::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
         width: 24px;
         height: 24px;
-        background: #3b82f6;
+        background: #3b82f6; /* blue-500 */
         border-radius: 50%;
         cursor: pointer;
-        border: 2px solid white;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        margin-top: -8px;
+        border: 2px solid #1e293b;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        margin-top: -8px; /* Better vertical alignment */
     }
 
+    /* Firefox */
     .slider-custom::-moz-range-thumb {
         width: 24px;
         height: 24px;
-        background: #3b82f6;
+        background: #3b82f6; /* blue-500 */
         border-radius: 50%;
         cursor: pointer;
-        border: 2px solid white;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        border: 2px solid #1e293b;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     }
 
+    /* Track styling */
     .slider-custom::-webkit-slider-runnable-track {
-        height: 10px;
-        border-radius: 10px;
-        background: #d1d5dc;
+        height: 8px;
+        border-radius: 8px;
         border: 0;
     }
 
     .slider-custom::-moz-range-track {
-        height: 10px;
-        border-radius: 10px;
-        background: #d1d5dc;
+        height: 8px;
+        border-radius: 8px;
         border: 0;
     }
 
+    /* Focus styles */
     .slider-custom:focus {
         outline: none;
     }
 
+    .slider-custom:focus::-webkit-slider-thumb {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* blue-500 with opacity */
+    }
+
+    .slider-custom:focus::-moz-range-thumb {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3); /* blue-500 with opacity */
+    }
+
+    /* Remove browser default styling */
     .slider-custom::-ms-track {
         width: 100%;
         cursor: pointer;
@@ -225,6 +236,7 @@ Enter the duration and filesize of a video to calculate its bitrate with this we
         color: transparent;
     }
 
+    /* Time input container for better alignment */
     .time-input {
         display: flex;
         flex-direction: column;
