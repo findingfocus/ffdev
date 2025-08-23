@@ -1,10 +1,5 @@
-<script>
-    let mobileImageLoaded = false;
-    let desktopImageLoaded = false;
-</script>
+<h1 class="font-bold">About Me</h1>
 
-
-<h2 class="font-bold">About Me</h2>
 <div class="flex flex-col items-center justify-center ml-4 float-right">
     <a href="https://www.linkedin.com/in/findingfocusdev/" target="_blank" rel="noopener noreferrer" title="Paul's Linked-In Profile">
         <!-- Image for mobile with placeholder background -->
@@ -29,18 +24,18 @@
 
 
 <p>
-    My name is Paul Thompson, I am an interdisciplinary artist interested in developing software solutions and interactive art. I own a small video production company in Albuquerque, New Mexico, but my recent studies have led to a deepening skillset that now includes programming and computer science.
+    My name is Paul Thompson, I am an interdisciplinary artist interested in developing software solutions and interactive art.
 </p>
 <p>
     I am analytical, professional, and highly motivated to learn and integrate with a team focused on a digital engineering ecosystem.
 </p>
 <p>
-    C is my favorite programming language, but I use Lua most often when prototyping ideas. I built this website with HTML, CSS, and Javascript.
+    C is my favorite programming language, but I use Lua most often when prototyping ideas. I built this website with SvelteKit 5 and TailwindCSS, deployed using docker and nginx.
 </p>
 
 <div class="mt-6"></div>
 
-<h3 class="font-bold">Education and Certifications</h3>
+<h1 class="font-bold">Education and Certifications</h1>
 <p class="italic">Bachelor of Fine Arts (BFA) in Film & Digital Arts</p>
 <div class="mt-4"></div>
 <p class="italic">Deep Dive Coding Bootcamp: Fullstack Web Development</p>

@@ -3,6 +3,6 @@ npm-debug.log
 .git
 .github
 .gitignore
-.env
+frontend/.env
 .env.*
 !.env.example
