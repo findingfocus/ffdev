@@ -82,6 +82,8 @@
 			alt="Sandias Mountains"
 			class="fixed top-0 left-0 w-full h-[105vh] object-cover bg-fixed bg-left bg-no-repeat z-0 inset-0 bg-[#0a1b4d]/60 mix-blend-multiply md:translate-y-0 -translate-y-18">
 	<div class="absolute inset-0 bg-[#0a1b4d]/70"></div>
+	<div class="fixed bottom-0 left-0 w-full h-[20vh] bg-gradient-to-t from-black to-transparent pointer-events-none z-10"></div>
+
 
 	<div class="mx-auto mt-0 z-15 w-full">
 		<!-- Container with aspect ratio placeholder that maintains space -->
