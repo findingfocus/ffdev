@@ -135,22 +135,22 @@
 					</li>
 					<li>
 						<a href="/interactive-art"
-						   class="block pr-4 md:p-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
+						   class="block pr-4 md:py-4 md:px-3 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
 						>Interactive Art</a>
 					</li>
 					<li>
 						<a href="/programming"
-						   class="block pr-4 md:p-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
+						   class="block pr-4 md:py-4 md:px-3 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
 						>Programming</a>
 					</li>
 					<li>
 						<a href="/coding-streams"
-						   class="block pr-4 md:p-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
+						   class="block pr-4 md:py-4 md:px-3 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
 						>Coding Streams</a>
 					</li>
 					<li>
 						<a href="/contact"
-						   class="block pr-4 md:p-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/contact' ? 'text-white' : ''}"
+						   class="block pr-4 md:py-4 md:px-3 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/contact' ? 'text-white' : ''}"
 						>Contact Me</a>
 					</li>
 				</ul>

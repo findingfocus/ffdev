@@ -1,12 +1,23 @@
+<script>
+    let mobileImageLoaded = false;
+    let desktopImageLoaded = false;
+</script>
+
+
 <h2 class="font-bold">About Me</h2>
 <div class="flex flex-col items-center justify-center ml-4 float-right">
     <a href="https://www.linkedin.com/in/findingfocusdev/" target="_blank" rel="noopener noreferrer" title="Paul's Linked-In Profile">
-        <!-- Image for mobile -->
-        <img src="/images/headshot-square.webp" alt="Paul Thompson"
-             class="w-34 border-[3px] rounded-xl border-gray-800 hover:border-[#434A73] md:hidden">
-        <!-- Image for desktop -->
-        <img src="/images/headshot-square.webp" alt="Paul Thompson"
-             class="w-48 border-[3px] rounded-xl border-gray-800 hover:border-[#434A73] hidden md:block">
+        <!-- Image for mobile with placeholder background -->
+        <div class="w-34 h-34 md:hidden bg-blue-950 rounded-xl">
+            <img src="/images/headshot-square.webp" alt="Paul Thompson"
+                 class="w-full h-full object-cover border-[3px] rounded-xl border-gray-800 hover:border-[#434A73]">
+        </div>
+
+        <!-- Image for desktop with placeholder background -->
+        <div class="w-48 h-48 hidden md:block bg-blue-950 rounded-xl">
+            <img src="/images/headshot-square.webp" alt="Paul Thompson"
+                 class="w-full h-full object-cover border-[3px] rounded-xl border-gray-800 hover:border-[#434A73]">
+        </div>
     </a>
     <a href="https://drive.google.com/file/d/1UN4Cuqkf7Sx3DmAXCgM75jfzqoZLJgJC/view?usp=sharing" target="_blank" rel="noopener noreferrer">
         <button type="button" class="mt-2 px-3 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] transition shadow-xl">View Resume</button>
@@ -15,6 +26,7 @@
         <button type="button" class="mt-2 px-3 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition shadow-xl">Github Portfolio</button>
     </a>
 </div>
+
 
 <p>
     My name is Paul Thompson, I am an interdisciplinary artist interested in developing software solutions and interactive art. I own a small video production company in Albuquerque, New Mexico, but my recent studies have led to a deepening skillset that now includes programming and computer science.
