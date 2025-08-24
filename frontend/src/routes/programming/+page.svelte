@@ -75,18 +75,66 @@
     import artistPrayerCode from '$lib/code/artistPrayer.c?raw';
 </script>
 
-<h2 class="text-xl font-bold mb-2">No Concessions</h2>
-<p>I recently deployed a web application called <a class="text-cyan-500 hover:text-cyan-400" href="https://noconcessions.xyz" target="_blank" rel="noopener noreferrer">No Concessions</a> that allows users to find new movies based on shared taste with other users.</p>
-<p>The application was built with React, TypeScript, Express, Tailwind, PostgreSQL, and Docker.</p>
-<br>
-<h2 class="text-xl font-bold mb-2">Saltomanga</h2>
-<p>I developed a website to showcase art work for <a class="text-cyan-500 hover:text-cyan-400" href="https://saltomanga.com" target="_blank" rel="noopener noreferrer">Saltomanga</a></p>
+<h2 class="text-xl font-bold mt-3 mb-2">Saltomanga</h2>
+<p>I developed a website to showcase artwork for <a class="text-cyan-500 hover:text-cyan-400" href="https://saltomanga.com" target="_blank" rel="noopener noreferrer">Saltomanga</a></p>
 <p>Built with SvelteKit 5, Tailwind, PostgreSQL, Nginx, and Docker. We now offer a sticker pack sold in the <a class="text-cyan-500 hover:text-cyan-400" href="https://saltomanga.com/shop" target="_blank" rel="noopener noreferrer">shop</a></p>
 <br>
-<h2 class="text-xl font-bold mb-2">Comic Strip</h2>
+<a
+        href="https://saltomanga.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block w-full rounded-lg overflow-hidden border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.01] hover:shadow-lg"
+>
+    <img
+            class="w-full rounded-lg"
+            alt="Saltomanga website"
+            src="https://res.cloudinary.com/dh8nskoaz/image/upload/v1756010386/saltomanga_lo6yyf.webp"
+    >
+</a>
+<h2 class="text-xl font-bold mb-2 mt-6">No Concessions</h2>
+<div class="flex flex-col md:flex-row gap-4">
+    <div class="md:w-1/2">
+        <p>I recently deployed a web application called <a class="text-cyan-500 hover:text-cyan-400" href="https://noconcessions.xyz" target="_blank" rel="noopener noreferrer">No Concessions</a> that allows users to find new movies based on shared taste with other users.</p>
+        <br>
+        <p><a class="text-cyan-500 hover:text-cyan-400" href="https://noconcessions.xyz" target="_blank" rel="noopener noreferrer">Create an account</a> to save movies to your watchlist and get new recommendations. Invite your friends and build out your taste profile.</p>
+    </div>
+
+    <div class="md:w-7/8">
+        <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1112629311?badge=0&amp;autoplay=1&amp:title=0&amp;app_id=58479&amp:quality=auto" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="No Concessions - Make connections and get recommendations!"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+    </div>
+</div>
+<h2 class="text-xl font-bold mb-2 mt-6">Comic Strip</h2>
 <p>I host my comics on my art website <a class="text-cyan-500 hover:text-cyan-400" href="https://findingfocus.art" target="_blank" rel="noopener noreferrer">findingfocus.art</a></p>
-<p>The site is built using React, TypeScript, Tailwind, and Nginx with pm2 as the process manager. There are over 300 comics included and .</p>
+<p>The site is built using React, TypeScript, Tailwind, and Nginx with pm2 as the process manager. There are over 300 comics included and some are multi-panel and some are animated.</p>
 <br>
+<div class="flex flex-col md:flex-row gap-6 w-full">
+    <a
+            href="https://findingfocus.art/?comic=252"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full rounded-lg overflow-hidden border-3 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg h-full"
+    >
+        <img
+                class="w-full rounded-lg h-full"
+                alt="Comic Strip - Be Prepared"
+                src="https://res.cloudinary.com/dh8nskoaz/image/upload/v1756011953/2021-04-20_COMIC_BE-PREPARED_1of1_qhy4hn.webp"
+        >
+    </a>
+
+    <a
+            href="https://findingfocus.art/?comic=325"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block w-full rounded-lg overflow-hidden border-3 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg h-full"
+    >
+        <img
+                class="w-full rounded-lg h-full"
+                alt="Comic Strip - TMNT"
+                src="https://res.cloudinary.com/dh8nskoaz/image/upload/v1756012133/2022-06-17_COMIC_TMNT_1of1_mdnlxs.webp"
+        >
+    </a>
+</div>
+
 <h2 class="text-xl font-bold mb-2">Bitrate Calculator</h2>
 Enter the duration and filesize of a video to calculate its bitrate with this web application. I use this for analyzing old videos and estimating filesizes for exports.
 <br>
@@ -174,7 +222,7 @@ Enter the duration and filesize of a video to calculate its bitrate with this we
 
 
 <h2 class="text-xl font-bold mb-2">Python Application</h2>
-<p>I use this program to format word document files with information making it easier for videographers to do their job.</p>
+<p>I use this program to format word document files with information making it easier for videographers to do their job. The  <a class="text-cyan-500 hover:text-cyan-400" href="https://trattel.xyz" target="_blank" rel="noopener noreferrer">site</a> is deployed using gunicorn as the WSGI, with Nginx as a reverse proxy handling client requests, providing load balancing, and serving files.</p>
 <Code language="python" code={trattelCode} />
 
 <h2 class="text-xl font-bold mt-6 mb-2">SonicPi music for programming</h2>
