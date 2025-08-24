@@ -135,7 +135,7 @@
     </a>
 </div>
 
-<h2 class="text-xl font-bold mb-2">Bitrate Calculator</h2>
+<h2 class="text-xl font-bold mt-6 mb-2">Bitrate Calculator</h2>
 Enter the duration and filesize of a video to calculate its bitrate with this web application. I use this for analyzing old videos and estimating filesizes for exports.
 <br>
 <Card class="mt-3 bg-gray-900 border border-blue-800/30 shadow shadow-blue-900/20 p-6 max-w-xl mx-auto rounded-xl mb-8">
