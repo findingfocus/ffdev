@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.css';
+	import '../prism.css';
 	import { slide } from "svelte/transition";
 	import {linear} from "svelte/easing";
 	import { onMount } from 'svelte';

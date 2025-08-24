@@ -37,7 +37,7 @@
 <div class="md:mx-auto flex flex-col items-center justify-center gap-8 mt-3">
     <div class="flex items-center justify-center w-full">
         <Card class="bg-gray-900 border border-blue-800/30 shadow shadow-blue-900/20 dark:bg-gray-900 dark:border-blue-800/20 max-w-sm rounded-xl p-6 mb-8">
-            <h5 class="mb-4 text-2xl font-bold tracking-tight text-white">Get in Touch</h5>
+            <h5 class="mb-4 text-xl font-bold tracking-tight text-white">Get in Touch</h5>
             <p class="mb-2 font-normal text-gray-300 dark:text-gray-300 leading-relaxed">
                 <span class="block">For business inquiries or general feedback about my work, I'd love to hear from you!</span>
             </p>

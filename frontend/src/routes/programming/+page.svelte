@@ -68,21 +68,29 @@
             return false;
         }
     }
+
+    import Code from '$lib/components/Code.svelte';
+    import trattelCode from '$lib/code/trattel.py?raw';
+    import sonicPiCode from '$lib/code/sonicPi.rb?raw';
+    import artistPrayerCode from '$lib/code/artistPrayer.c?raw';
 </script>
 
-
 <h2 class="text-xl font-bold mb-2">No Concessions</h2>
-<p>I recently deployed a web application called <a class="text-cyan-500 hover:text-cyan-400" href="http://noconcessions.xyz" target="_blank" rel="noopener noreferrer">No Concessions</a> that allows users to find new movies based on shared taste with other users.</p>
+<p>I recently deployed a web application called <a class="text-cyan-500 hover:text-cyan-400" href="https://noconcessions.xyz" target="_blank" rel="noopener noreferrer">No Concessions</a> that allows users to find new movies based on shared taste with other users.</p>
 <p>The application was built with React, TypeScript, Express, Tailwind, PostgreSQL, and Docker.</p>
+<br>
+<h2 class="text-xl font-bold mb-2">Saltomanga</h2>
+<p>I developed a website to showcase art work for <a class="text-cyan-500 hover:text-cyan-400" href="https://saltomanga.com" target="_blank" rel="noopener noreferrer">Saltomanga</a></p>
+<p>Built with SvelteKit 5, Tailwind, PostgreSQL, Nginx, and Docker. We now offer a sticker pack sold in the <a class="text-cyan-500 hover:text-cyan-400" href="https://saltomanga.com/shop" target="_blank" rel="noopener noreferrer">shop</a></p>
 <br>
 <h2 class="text-xl font-bold mb-2">Comic Strip</h2>
 <p>I host my comics on my art website <a class="text-cyan-500 hover:text-cyan-400" href="https://findingfocus.art" target="_blank" rel="noopener noreferrer">findingfocus.art</a></p>
-<p>The site is built using React, TypeScript, Tailwind, and Nginx with pm2 as the process manager. I have over 200 more comics still needing to be exported and added to the site.</p>
+<p>The site is built using React, TypeScript, Tailwind, and Nginx with pm2 as the process manager. There are over 300 comics included and .</p>
 <br>
 <h2 class="text-xl font-bold mb-2">Bitrate Calculator</h2>
 Enter the duration and filesize of a video to calculate its bitrate with this web application. I use this for analyzing old videos and estimating filesizes for exports.
 <br>
-<Card class="mt-3 bg-gray-900 border border-blue-800/30 shadow shadow-blue-900/20 p-6 max-w-xl mx-auto rounded-xl">
+<Card class="mt-3 bg-gray-900 border border-blue-800/30 shadow shadow-blue-900/20 p-6 max-w-xl mx-auto rounded-xl mb-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div class="time-input">
             <label for="hourSlider" class="block mb-2 text-sm font-medium text-indigo-50">
@@ -164,7 +172,22 @@ Enter the duration and filesize of a video to calculate its bitrate with this we
     </div>
 </Card>
 
+
+<h2 class="text-xl font-bold mb-2">Python Application</h2>
+<p>I use this program to format word document files with information making it easier for videographers to do their job.</p>
+<Code language="python" code={trattelCode} />
+
+<h2 class="text-xl font-bold mt-6 mb-2">SonicPi music for programming</h2>
+<p>This is the ruby code for the soundtrack that backs my live programming streams.</p>
+<Code language="ruby" code={sonicPiCode} />
+
+<h2 class="text-xl font-bold mt-6 mb-2">Artist's Prayer in C</h2>
+<p>This is a small C program that prints out a prayer that I wrote.</p>
+<Code language="c" code={artistPrayerCode} />
+<div class="mb-8"></div>
+
 <style>
+
     /* Custom slider styling for larger thumb (the ball) */
     .slider-custom {
         -webkit-appearance: none;
