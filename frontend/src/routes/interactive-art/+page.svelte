@@ -60,21 +60,23 @@
         <h2 class="text-xl font-bold mb-3">Joust</h2>
         <p class="text-base">
             My remake of the 1982 Williams Electronics game, Joust. Built in
-            <a href="https://love2d.org" target="_blank" rel="noopener noreferrer" class="link">Love2d</a> with
+            <a href="https://love2d.org" target="_blank" rel="noopener noreferrer" class="link text-cyan-500 hover:text-cyan-400">Love2d</a> with
             <a href="https://www.lua.org/" target="_blank" rel="noopener noreferrer" class="link">Lua</a>.
             My version comes with 25 waves of enemies, a two-player mode, and a leaderboard!
         </p>
     </div>
 
-    <!-- Right column: Game video -->
-    <div class="flex flex-col items-center w-full">
-        <video playsinline autoplay muted loop class="w-full h-auto rounded-t-lg shadow-lg mb-0">
+    <!-- For the video -->
+    <div class="flex justify-center items-center mx-auto">
+        <video playsinline autoplay muted loop class="w-[500px] max-w-full rounded-lg shadow-lg">
             <source src="/video/joust.webm" type="video/webm">
             <source src="/video/joust.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-        <div class="w-full bg-black mt-0 rounded-b-lg overflow-hidden shadow-lg">
-            <canvas id="canvas2" width="500" height="120" class="w-full max-w-full h-auto"></canvas>
-        </div>
+    </div>
+
+    <!-- For the game canvas -->
+    <div class="text-center mx-auto w-[500px] max-w-full rounded-lg md:-mt-40">
+        <canvas id="canvas2" width="500" height="120" class="w-full h-auto"></canvas>
     </div>
 </div>
