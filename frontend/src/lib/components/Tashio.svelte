@@ -1,3 +1,4 @@
+
 <script>
     import { onMount } from 'svelte';
 
@@ -159,21 +160,7 @@
     });
 </script>
 
-<div class="game-container">
-    <canvas id="loadingCanvas" on:contextmenu={preventContextMenu} width="450" height="450"></canvas>
-    <canvas id="canvas" on:contextmenu={preventContextMenu}></canvas>
+<div class="flex flex-col items-center justify-center mx-auto my-0 max-h-[574px]">
+    <canvas id="loadingCanvas" on:contextmenu={preventContextMenu} width="320" height="580" class="block translate-y-17"></canvas>
+    <canvas id="canvas" class="invisible block my-0 p-0" on:contextmenu={preventContextMenu}></canvas>
 </div>
-
-<style>
-    .game-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto;
-    }
-
-    #canvas {
-        visibility: hidden;
-    }
-</style>
