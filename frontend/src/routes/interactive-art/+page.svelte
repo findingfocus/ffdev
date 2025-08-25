@@ -32,6 +32,7 @@
                 <div class="text-blue-100 font-mono">'TAB'</div><div>START BUTTON</div>
             </div>
         </div>
+
     </div>
 
     <!-- Right column: Game embed -->
@@ -54,9 +55,9 @@
     </div>
 </div>
 
-<div class="md:grid md:grid-cols-2 md:gap-8 mt-6 md:mt-24">
+<div class="lg:grid lg:grid-cols-2 lg:gap-12 mt-6 lg:mt-24">
     <!-- Left column: Game description -->
-    <div class="mb-6 md:mb-0">
+    <div class="mb-6 lg:mb-0">
         <h2 class="text-xl font-bold mb-3">Joust</h2>
         <p class="text-base">
             My remake of the 1982 Williams Electronics game, Joust. Built in
@@ -67,16 +68,115 @@
     </div>
 
     <!-- For the video -->
-    <div class="flex justify-center items-center mx-auto">
-        <video playsinline autoplay muted loop class="w-[500px] max-w-full rounded-lg shadow-lg">
-            <source src="/video/joust.webm" type="video/webm">
-            <source src="/video/joust.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+    <div class="flex justify-center items-center mx-auto max-w-[500px]">
+        <a
+                href="https://github.com/findingfocus/joust.git"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="mt-2 block w-full rounded-lg overflow-hidden border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
+        >
+            <video playsinline autoplay muted loop class="w-[500px] max-w-full rounded-lg shadow-lg">
+                <source src="/video/joust.webm" type="video/webm">
+                <source src="/video/joust.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </a>
+
     </div>
 
     <!-- For the game canvas -->
-    <div class="text-center mx-auto w-[500px] max-w-full rounded-lg md:-mt-40">
+    <div class="text-center mx-auto w-[500px] max-w-full rounded-lg lg:-mt-40">
         <canvas id="canvas2" width="500" height="120" class="w-full h-auto"></canvas>
     </div>
+</div>
+
+
+<div class="flex flex-wrap justify-center text-xs md:text-sm gap-3 md:gap-8 mt-8">
+    <a
+            href="https://github.com/findingfocus/joust/releases/download/v1.1/Joust_win32-v1.1.zip"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Joust_win32-v1.1.zip"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+    >
+        <span>Download</span>
+        <img class="h-3 w-3 md:w-4 md:h-4" src="images/icons/windows-icon.png" alt="Windows" title="Joust Windows Executable Download">
+    </a>
+
+    <a
+            href="https://github.com/findingfocus/joust/releases/download/v1.1/Joust_osx-v1.1.zip"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Joust_osx-v1.1.zip"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-black border-2 hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+    >
+        <span>Download</span>
+        <img class="h-3 w-3 md:w-4 md:h-4" src="images/icons/apple-icon.png" alt="macOS" title="Joust MacOS Executable Download">
+    </a>
+
+    <a
+            href="https://github.com/findingfocus/joust/releases/download/v1.1/Joust_linux-v1.1.tar.gz"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Joust_linux-v1.1.tar.gz"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-black border-2 hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+    >
+        <span>Download</span>
+        <img class="h-3 w-3 md:h-4 md:w-4" src="images/icons/linux-icon.png" alt="Linux" title="Joust Linux Executable Download">
+    </a>
+</div>
+
+<h2 class="text-xl font-bold mb-3 mt-12">Tak: A Beautiful Game</h2>
+<p>Tak is a board game from the novel "The Wise Man's Fear", created by James Ernest and Patrick Rothfuss. I programmed my own version of the game in Love2d and Lua. It is a competitive board game for two players, so grab a friend and let the game commence!</p>
+
+
+<div class="flex justify-center items-center mx-auto mt-6">
+
+    <a
+            href="https://github.com/findingfocus/tak"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-2 mx-auto max-w-[500px] block w-[500px] rounded-lg overflow-hidden border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.01] hover:shadow-lg border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+    >
+        <video playsinline autoplay muted loop class="w-[500px] max-w-full rounded-lg shadow-lg">
+            <source src="/video/tak.webm" type="video/webm">
+            <source src="/video/tak.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </a>
+</div>
+
+<div class="flex flex-wrap justify-center gap-3 md:gap-12 mt-8 text-xs md:text-sm">
+    <a
+            href="https://github.com/findingfocus/tak/releases/download/v1.0/Tak_win32-v1.0.zip"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Tak_win32-v1.0.zip"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+    >
+        <span>Download</span>
+        <img class="h-3 w-3 lg:h-4 lg:w-4" src="images/icons/windows-icon.png" alt="Windows" title="Tak Windows Executable Download">
+    </a>
+
+    <a
+            href="https://github.com/findingfocus/tak/releases/download/v1.0/Tak_osx-v1.0.zip"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Tak_osx-v1.0.zip"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+    >
+        <span>Download</span>
+        <img class="h-3 w-3 md:h-4 md:w-4" src="images/icons/apple-icon.png" alt="macOS" title="Tak MacOS Executable Download">
+    </a>
+
+    <a
+            href="https://github.com/findingfocus/tak/releases/download/v1.0/Tak_linux-v1.0.tar.gz"
+            rel="noopener noreferrer"
+            type="button"
+            title="Tak_linux-v1.0.tar.gz"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+    >
+        <span>Download</span>
+        <img class="h-3 w-3 md:h-4 md:w-4" src="images/icons/linux-icon.png" alt="Linux" title="Tak Linux Executable Download">
+    </a>
 </div>
