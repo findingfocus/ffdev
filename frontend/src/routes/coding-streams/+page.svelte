@@ -6,11 +6,11 @@
 
     <div class="mb-6">
         <p class="mb-3">Watch me program my new game live on twitch:
-            <a href="https://twitch.tv/findingfocusdev" class="inline-block px-3 py-2 bg-purple-800 text-white font-medium rounded-md shadow-md  hover:bg-purple-900 transition duration-300 hover:scale-[1.025]">Twitch</a>
+            <a href="https://twitch.tv/findingfocusdev" class="inline-block px-2 py-2 border-1 border-black bg-purple-800 text-white font-medium rounded-md shadow-md  hover:bg-purple-900 transition duration-300 hover:scale-[1.025]">Twitch</a>
         </p>
 
         <p class="mb-3">Visit my YouTube channel for all my coding streams:
-            <a href="https://youtube.com/findingfocus" class="inline-block px-3 py-2 bg-gradient-to-r from-red-600 to-red-700 text-white font-medium rounded-md shadow-md hover:from-red-700 hover:to-red-800 transition duration-300 hover:scale-[1.025]">YouTube</a>
+            <a href="https://youtube.com/findingfocus" class="inline-block px-2 py-2 border-1 border-black bg-gradient-to-r from-red-600 to-red-700 text-white font-medium rounded-md shadow-md hover:from-red-700 hover:to-red-800 transition duration-300 hover:scale-[1.025]">YouTube</a>
         </p>
 
         <p class="mb-6">Or check out my playlists down below!</p>
@@ -90,11 +90,11 @@
 
     <div class="flex flex-wrap justify-center gap-4 mt-8">
         <a href="https://www.youtube.com/user/findingfocus?sub_confirmation=1"
-           class="px-3 py-2 bg-red-700 text-white font-medium rounded-md shadow-md hover:bg-red-800 transition duration-300">
+           class="px-3 py-2 border-1 border-black bg-red-700 text-white font-medium rounded-md shadow-md hover:bg-red-800 transition duration-300 hover:scale-[1.025]">
             Subscribe on YouTube
         </a>
         <a href="https://twitch.tv/findingfocusdev"
-           class="px-3 py-2 bg-gradient-to-r bg-purple-800 hover:bg-purple-900 text-white font-medium rounded-md shadow-md transition duration-300">
+           class="px-3 py-2 border-1 border-black bg-gradient-to-r bg-purple-800 hover:bg-purple-900 text-white font-medium rounded-md shadow-md transition duration-300 hover:scale-[1.025]">
             Follow me on Twitch
         </a>
     </div>

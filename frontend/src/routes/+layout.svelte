@@ -141,11 +141,11 @@
 						   class="block pr-4 md:py-4 md:px-3 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
 						>Interactive Art</a>
 					</li>
-					<li>
-						<a href="/programming"
-						   class="block pr-4 md:py-4 md:px-3 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
-						>Programming</a>
-					</li>
+                    <li>
+                        <a href="/programming"
+                           class="block pr-4 md:py-4 md:px-3 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
+                        >Web Programming</a>
+                    </li>
 					<li>
 						<a href="/coding-streams"
 						   class="block pr-4 md:py-4 md:px-3 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/coding-streams' ? 'text-white' : ''}"
@@ -172,17 +172,17 @@
 									   class="block py-2.5 pl-3 pr-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/' ? 'text-white' : ''}"
 									>Home</a>
 								</li>
-								<li>
-									<a href="/interactive-art"
-									   onclick={handleNavClick}
-									   class="block py-2.5 pl-3 pr-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
-									>Interactive Art</a>
-								</li>
+                                <li>
+                                    <a href="/interactive-art"
+                                       onclick={handleNavClick}
+                                       class="block py-2.5 pl-3 pr-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/interactive-art' ? 'text-white' : ''}"
+                                    >Interactive Art</a>
+                                </li>
 								<li>
 									<a href="/programming"
 									   onclick={handleNavClick}
 									   class="block py-2.5 pl-3 pr-4 text-[#9ca3af]/100 text-right leading-none text-[1em] font-['Arial'] p-2 hover:bg-white hover:text-black transition-all duration-600 {currentPath === '/programming' ? 'text-white' : ''}"
-									>Programming</a>
+									>Web Programming</a>
 								</li>
 								<li>
 									<a href="/coding-streams"

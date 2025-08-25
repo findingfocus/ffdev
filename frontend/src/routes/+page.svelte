@@ -1,3 +1,6 @@
+<script>
+</script>
+
 <h2 class="text-xl font-bold mb-2">About Me</h2>
 
 <div class="flex flex-col items-center justify-center ml-4 float-right">
@@ -5,20 +8,20 @@
         <!-- Image for mobile with placeholder background -->
         <div class="w-34 h-34 md:hidden bg-blue-950 rounded-xl">
             <img src="/images/headshot-square.webp" alt="Paul Thompson"
-                 class="w-full h-full object-cover border-[3px] rounded-xl border-gray-800 hover:border-[#434A73]">
+                 class="w-full h-full object-cover border-[3px] rounded-xl border-gray-800 hover:border-[#434A73] transition hover:scale-[1.05] transition duration-300">
         </div>
 
         <!-- Image for desktop with placeholder background -->
         <div class="w-44 h-44 hidden md:block bg-blue-950 rounded-xl">
             <img src="/images/headshot-square.webp" alt="Paul Thompson"
-                 class="w-full h-full object-cover border-[3px] rounded-xl border-gray-800 hover:border-[#434A73]">
+                 class="w-full h-full object-cover border-[3px] rounded-xl border-gray-800 hover:border-[#434A73] transition duration-300 hover:scale-[1.03]">
         </div>
     </a>
     <a href="/documents/resume.pdf" target="_blank" rel="noopener noreferrer">
-        <button type="button" class="mt-2 px-3 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] transition shadow-xl">View Resume</button>
+        <button type="button" class="mt-2 px-3 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] border-1 border-black transition shadow-xl duration-300 hover:scale-[1.025]">View Resume</button>
     </a>
     <a href="https://github.com/findingfocus" target="_blank" rel="noopener noreferrer">
-        <button type="button" class="mt-2 px-3 py-2 bg-green-700 text-white rounded hover:bg-green-800 transition shadow-xl">Github Portfolio</button>
+        <button type="button" class="mt-2 px-3 py-2 bg-green-700 text-white rounded hover:bg-green-800 border-1 border-black transition shadow-xl duration-300 hover:scale-[1.025]">Github Portfolio</button>
     </a>
 </div>
 
