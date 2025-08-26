@@ -54,7 +54,7 @@
                 <div class="text-blue-100 font-mono">'WASD'</div><div>DPAD</div>
                 <div class="text-blue-100 font-mono">'P or SPACE'</div><div>A BUTTON</div>
                 <div class="text-blue-100 font-mono">'O or SHIFT'</div><div>B BUTTON</div>
-                <div class="text-blue-100 font-mono">'H'</div><div>SELECT BUTTON</div>
+                <div class="text-blue-100 font-mono">'`'</div><div>SELECT BUTTON</div>
                 <div class="text-blue-100 font-mono">'TAB'</div><div>START BUTTON</div>
             </div>
         </div>
