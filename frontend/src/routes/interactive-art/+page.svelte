@@ -76,7 +76,7 @@
                 href="https://github.com/findingfocus/joust.git"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="mt-2 block w-full rounded-lg overflow-hidden border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
+                class="mt-2 block w-full rounded-lg overflow-hidden border-2 border-black hover:border-[#335b7f] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
         >
             <video playsinline autoplay muted loop class="w-[500px] max-w-full rounded-lg shadow-lg">
                 <source src="/video/joust.webm" type="video/webm">
@@ -100,7 +100,7 @@
             target="_blank"
             rel="noopener noreferrer"
             title="Joust_win32-v1.1.zip"
-            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-0 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <span>Download</span>
         <img class="h-3 w-3 md:w-4 md:h-4" src="images/icons/windows-icon.png" alt="Windows" title="Joust Windows Executable Download">
@@ -111,7 +111,7 @@
             target="_blank"
             rel="noopener noreferrer"
             title="Joust_osx-v1.1.zip"
-            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-black border-2 hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-black border-0 hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <span>Download</span>
         <img class="h-3 w-3 md:w-4 md:h-4" src="images/icons/apple-icon.png" alt="macOS" title="Joust MacOS Executable Download">
@@ -122,7 +122,7 @@
             target="_blank"
             rel="noopener noreferrer"
             title="Joust_linux-v1.1.tar.gz"
-            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-black border-2 hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-black border-0 hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <span>Download</span>
         <img class="h-3 w-3 md:h-4 md:w-4" src="images/icons/linux-icon.png" alt="Linux" title="Joust Linux Executable Download">
@@ -138,7 +138,7 @@
             href="https://github.com/findingfocus/tak"
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-2 mx-auto max-w-[500px] block w-[500px] rounded-lg overflow-hidden border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.01] hover:shadow-lg border-black hover:border-[#434A73] duration-300 hover:scale-[1.03] hover:shadow-lg"
+            class="mt-2 mx-auto max-w-[500px] block w-[500px] rounded-lg overflow-hidden border-2 border-black hover:border-[#335b7f] transition-transform duration-300 hover:scale-[1.01] hover:shadow-lg"
     >
         <video playsinline autoplay muted loop class="w-[500px] max-w-full rounded-lg shadow-lg">
             <source src="/video/tak.webm" type="video/webm">
@@ -148,13 +148,13 @@
     </a>
 </div>
 
-<div class="flex flex-wrap justify-center gap-3 md:gap-12 mt-8 text-xs md:text-sm">
+<div class="flex flex-wrap justify-center gap-3 md:gap-12 mt-8 text-xs md:text-sm mb-8">
     <a
             href="https://github.com/findingfocus/tak/releases/download/v1.0/Tak_win32-v1.0.zip"
             target="_blank"
             rel="noopener noreferrer"
             title="Tak_win32-v1.0.zip"
-            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-0 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <span>Download</span>
         <img class="h-3 w-3 lg:h-4 lg:w-4" src="images/icons/windows-icon.png" alt="Windows" title="Tak Windows Executable Download">
@@ -165,7 +165,7 @@
             target="_blank"
             rel="noopener noreferrer"
             title="Tak_osx-v1.0.zip"
-            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-0 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <span>Download</span>
         <img class="h-3 w-3 md:h-4 md:w-4" src="images/icons/apple-icon.png" alt="macOS" title="Tak MacOS Executable Download">
@@ -176,7 +176,7 @@
             rel="noopener noreferrer"
             type="button"
             title="Tak_linux-v1.0.tar.gz"
-            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-0 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <span>Download</span>
         <img class="h-3 w-3 md:h-4 md:w-4" src="images/icons/linux-icon.png" alt="Linux" title="Tak Linux Executable Download">

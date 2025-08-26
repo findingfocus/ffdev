@@ -3,11 +3,11 @@
 
     <div class="mb-6">
         <p class="mb-3">Watch me program my new game live on twitch:
-            <a href="https://twitch.tv/findingfocusdev" class="inline-block px-2 py-2 border-1 border-black bg-purple-800 text-white font-medium rounded-xl shadow-md  hover:bg-purple-700 transition duration-300 hover:scale-[1.03]">Twitch</a>
+            <a href="https://twitch.tv/findingfocusdev" class="inline-block px-2 py-2 border-0 border-black bg-purple-800 text-white font-medium rounded-xl shadow-md  hover:bg-purple-700 transition duration-300 hover:scale-[1.03]">Twitch</a>
         </p>
 
         <p class="mb-3">Visit my YouTube channel for all my coding streams:
-            <a href="https://youtube.com/findingfocus" class="inline-block px-2 py-2 border-1 border-black bg-red-700 text-white font-medium rounded-xl shadow-md hover:bg-red-600 transition duration-300 hover:scale-[1.03]">YouTube</a>
+            <a href="https://youtube.com/findingfocus" class="inline-block px-2 py-2 border-0 border-black bg-red-700 text-white font-medium rounded-xl shadow-md hover:bg-red-600 transition duration-300 hover:scale-[1.03]">YouTube</a>
         </p>
 
         <p class="mb-6">Or check out my playlists down below!</p>

@@ -83,7 +83,7 @@
         href="https://saltomanga.com"
         target="_blank"
         rel="noopener noreferrer"
-        class="block w-full rounded-lg overflow-hidden border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.01] hover:shadow-lg"
+        class="block w-full rounded-lg overflow-hidden border-2 border-black hover:border-[#335b7f] transition-transform duration-300 hover:scale-[1.01] hover:shadow-lg"
 >
     <img
             class="w-full rounded-lg"
@@ -112,7 +112,7 @@
             href="https://findingfocus.art/?comic=252"
             target="_blank"
             rel="noopener noreferrer"
-            class="block w-full rounded-lg overflow-hidden border-3 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg h-full"
+            class="block w-full rounded-lg overflow-hidden border-2 border-black hover:border-[#335b7f] transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg h-full"
     >
         <img
                 class="w-full rounded-lg h-full"
@@ -125,7 +125,7 @@
             href="https://findingfocus.art/?comic=325"
             target="_blank"
             rel="noopener noreferrer"
-            class="block w-full rounded-lg overflow-hidden border-3 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg h-full"
+            class="block w-full rounded-lg overflow-hidden border-2 border-black hover:border-[#335b7f] transition-transform duration-300 hover:scale-[1.02] hover:shadow-lg h-full"
     >
         <img
                 class="w-full rounded-lg h-full"
@@ -234,7 +234,6 @@ Enter the duration and filesize of a video to calculate its bitrate with this we
 <div class="mb-8"></div>
 
 <style>
-
     /* Custom slider styling for larger thumb (the ball) */
     .slider-custom {
         -webkit-appearance: none;

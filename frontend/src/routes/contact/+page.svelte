@@ -84,8 +84,7 @@
 
                 <button
                         type="submit"
-                        class="w-full bg-[#335b7f] text-white p-3 rounded-lg hover:bg-[#2d4d6e] focus:outline-none focus:ring-4 focus:ring-[#335b7f]/50 transition-all duration-200 font-medium flex items-center justify-center gap-2 shadow-xl"
-                >
+                        class="w-full bg-[#335b7f] text-white p-3 rounded-lg hover:bg-[#2d4d6e] focus:outline-none focus:ring-4 focus:ring-[#335b7f]/50 transition-all duration-300 font-medium flex items-center justify-center gap-2 shadow-xl  hover:scale-[1.02]">
                     Send Message <ArrowRightOutline class="w-4 h-4" />
                 </button>
 
