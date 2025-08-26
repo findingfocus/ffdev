@@ -33,7 +33,6 @@
 
         // Create the Module object with configuration
         window.Module = {
-            // Key part: Pass the path to the game.love file as an argument
             arguments: ["game.love"],
             INITIAL_MEMORY: 20971520, // Increased memory (20MB)
             printErr: function(text) {
@@ -69,29 +68,29 @@
                 this.totalDependencies = Math.max(this.totalDependencies, left);
                 window.Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
             },
-            preRun: [
-                function() {
-                    // Create a virtual file for game.love before the engine starts
-                    // This is more reliable than depending on love.js to load it
-                    console.log("Setting up virtual files...");
-
-                    // Create a listener to add the game.love file once FS is available
-                    Module.preRun.push(function() {
-                        if (!Module.gameLoveData) {
-                            console.error("Game data wasn't loaded correctly!");
-                            return;
-                        }
-
-                        try {
-                            // Create game.love in the root directory
-                            FS.createDataFile('/', 'game.love', Module.gameLoveData, true, false);
-                            console.log("Successfully created game.love in filesystem");
-                        } catch (e) {
-                            console.error("Error creating game.love:", e);
-                        }
-                    });
-                }
-            ]
+            // preRun: [
+            //     function() {
+            //         // Create a virtual file for game.love before the engine starts
+            //         // This is more reliable than depending on love.js to load it
+            //         console.log("Setting up virtual files...");
+            //
+            //         // Create a listener to add the game.love file once FS is available
+            //         Module.preRun.push(function() {
+            //             if (!Module.gameLoveData) {
+            //                 console.error("Game data wasn't loaded correctly!");
+            //                 return;
+            //             }
+            //
+            //             try {
+            //                 // Create game.love in the root directory
+            //                 FS.createDataFile('/', 'game.love', Module.gameLoveData, true, false);
+            //                 console.log("Successfully created game.love in filesystem");
+            //             } catch (e) {
+            //                 console.error("Error creating game.love:", e);
+            //             }
+            //         });
+            //     }
+            // ]
         };
 
         window.Module.setStatus('Downloading...');
@@ -126,8 +125,8 @@
             .then(buffer => {
                 console.log("game.love downloaded, size:", buffer.byteLength);
 
-                // Store this for the preRun function
-                window.Module.gameLoveData = new Uint8Array(buffer);
+                // // Store this for the preRun function
+                // window.Module.gameLoveData = new Uint8Array(buffer);
 
                 // Now load the scripts
                 loadScripts();
@@ -162,8 +161,15 @@
     function stopGame() {
         try {
             if (window.Module && typeof window.Module.quit === "function") {
-                window.Module.quit();
-                window.location.reload();
+                const escEvent = new KeyboardEvent("keydown", {
+                    key: "Escape",
+                    keyCode: 27,
+                    code: "Escape",
+                    bubbles: true,
+                    cancelable: true
+                });
+                console.log("Simulating ESC key press");
+                window.dispatchEvent(escEvent);
             }
             console.log("LOVE.js game stopped");
         } catch(e) {
