@@ -17,7 +17,7 @@
 </script>
 
 <div class="md:grid md:grid-cols-2 md:gap-8 items-start mb-4">
-    <div class="mb-6 md:mb-0">
+    <div class="md:mb-0">
         <h2 class="text-xl font-bold mb-2">Tashio Tempo</h2>
         <p class="text-base mb-4">
             <a href="https://www.github.com/findingfocus/tashio" target="_blank" rel="noopener noreferrer" class="link text-cyan-500 hover:text-cyan-400 transition duration-150">Tashio Tempo</a>

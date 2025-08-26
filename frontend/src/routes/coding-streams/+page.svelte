@@ -1,5 +1,5 @@
 <div class="container mx-auto mb-8">
-    <h2 class="text-xl font-bold">Game Development Streams</h2>
+    <h2 class="text-xl font-bold mb-2">Game Development Streams</h2>
 
     <div class="mb-6">
         <p class="mb-3">Watch me program my new game live on twitch:

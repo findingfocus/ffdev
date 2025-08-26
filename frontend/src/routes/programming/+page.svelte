@@ -75,7 +75,7 @@
     import artistPrayerCode from '$lib/code/artistPrayer.c?raw';
 </script>
 
-<h2 class="text-xl font-bold mt-3 mb-2">Saltomanga</h2>
+<h2 class="text-xl font-bold mb-2">Saltomanga</h2>
 <p>I developed a website to showcase artwork for <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://saltomanga.com" target="_blank" rel="noopener noreferrer">Saltomanga</a></p>
 <p>Built with SvelteKit 5, Tailwind, PostgreSQL, Nginx, and Docker. We now offer a sticker pack sold in the <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://saltomanga.com/shop" target="_blank" rel="noopener noreferrer">shop</a></p>
 <br>
