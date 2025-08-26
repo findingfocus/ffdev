@@ -1,9 +1,26 @@
 <script>
     import Tashio from '../../lib/components/Tashio.svelte';
-    import {onMount, onDestroy} from "svelte";
+    import {onMount} from "svelte";
 
     onMount(() => {
-        // Create and load the Joust script
+        // Set up title protection first
+        const originalTitle = "Finding Focus";
+        const observer = new MutationObserver((mutations) => {
+            if (document.title !== originalTitle) {
+                document.title = originalTitle;
+            }
+        });
+
+        // Type-safe title element selection
+        const titleElement = document.querySelector('title');
+        if (titleElement) {
+            observer.observe(titleElement, {
+                childList: true,
+                characterData: true,
+                subtree: true
+            });
+        }
+
         const joustScript = document.createElement('script');
         joustScript.src = "/joust/joust.js";
         joustScript.onload = () => {
@@ -11,10 +28,16 @@
         };
         joustScript.onerror = (e) => console.error('Failed to load Joust:', e);
         document.body.appendChild(joustScript);
+
+        return () => {
+            observer.disconnect();
+        };
     });
-
-
 </script>
+
+<svelte:head>
+    <title>Finding Focus</title>
+</svelte:head>
 
 <div class="md:grid md:grid-cols-2 md:gap-8 items-start mb-4">
     <div class="md:mb-0">

@@ -62,14 +62,11 @@
 			menuOpen = false;
 		}
 	}
-
-	function handleVideoLoad() {
-		document.getElementById('videoPlaceholder').style.display = 'none';
-	}
 </script>
 
 <svelte:head>
-	<style>
+    <title>Finding Focus</title>
+    <style>
 		/* Ensure the background color is set from the start */
 		:root, html, body {
 			background-color: #070F26;
