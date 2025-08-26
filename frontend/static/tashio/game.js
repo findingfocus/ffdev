@@ -4,9 +4,40 @@ var Module;
 if (typeof Module === 'undefined') Module = eval('(function() { try { return Module || {} } catch(e) { return {} } })()');
 
 if (!Module.expectedDataFileDownloads) {
-  Module.expectedDataFileDownloads = 0;
-  Module.finishedDataFileDownloads = 0;
+    Module.expectedDataFileDownloads = 0;
+    Module.finishedDataFileDownloads = 0;
 }
+
+Module.quit = function() {
+    try {
+        // Stop the main loop if it exists
+        if (typeof Module['_mainLoop'] !== 'undefined' && Module['_mainLoop']) {
+            if (Module['_mainLoop'].pause) Module['_mainLoop'].pause();
+            if (Module['_mainLoop'].stop) Module['_mainLoop'].stop();
+        }
+
+        // Kill WebGL contexts
+        document.querySelectorAll("canvas").forEach(canvas => {
+            try {
+                const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+                if (gl && gl.getExtension("WEBGL_lose_context")) {
+                    gl.getExtension("WEBGL_lose_context").loseContext();
+                }
+                canvas.remove();
+            } catch(e) {}
+        });
+
+        // Kill worker if any
+        if (Module['worker']) {
+            try { Module['worker'].terminate(); } catch(e) {}
+            Module['worker'] = null;
+        }
+
+        console.log("LOVE.js runtime stopped.");
+    } catch (e) {
+        console.error("Error during quit:", e);
+    }
+};
 Module.expectedDataFileDownloads++;
 (function() {
  var loadPackage = function(metadata) {

@@ -1,5 +1,6 @@
 <script>
-    import { onMount } from 'svelte';
+    import {onDestroy, onMount} from 'svelte';
+    import { beforeNavigate } from "$app/navigation";
 
     function preventContextMenu(event) {
         event.preventDefault();
@@ -43,10 +44,10 @@
             },
             canvas: (function() {
                 const canvas = document.getElementById('canvas');
-                canvas.addEventListener("webglcontextlost", function(e) {
-                    alert('WebGL context lost. You will need to reload the page.');
-                    e.preventDefault();
-                }, false);
+                // canvas.addEventListener("webglcontextlost", function(e) {
+                //     alert('WebGL context lost. You will need to reload the page.');
+                //     e.preventDefault();
+                // }, false);
                 return canvas;
             })(),
             locateFile: function(path, prefix) {
@@ -156,6 +157,24 @@
             gameScript.onerror = (e) => console.error('Failed to load game.js:', e);
             document.body.appendChild(gameScript);
         }
+    });
+
+    function stopGame() {
+        try {
+            if (window.Module && typeof window.Module.quit === "function") {
+                window.Module.quit();
+                window.location.reload();
+            }
+            console.log("LOVE.js game stopped");
+        } catch(e) {
+            console.warn("Error stopping game:", e);
+        }
+    }
+
+    // Stop game on navigation
+    const unsubscribe = beforeNavigate(() => stopGame());
+    onDestroy(() => {
+        stopGame();
     });
 </script>
 

@@ -1,6 +1,6 @@
 <script>
     import Tashio from '../../lib/components/Tashio.svelte';
-    import {onMount} from "svelte";
+    import {onMount, onDestroy} from "svelte";
 
     onMount(() => {
         // Create and load the Joust script
@@ -12,6 +12,8 @@
         joustScript.onerror = (e) => console.error('Failed to load Joust:', e);
         document.body.appendChild(joustScript);
     });
+
+
 </script>
 
 <div class="md:grid md:grid-cols-2 md:gap-8 items-start mb-4">
