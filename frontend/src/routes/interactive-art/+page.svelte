@@ -18,7 +18,8 @@
     <div class="mb-6 md:mb-0">
         <h2 class="text-xl font-bold mb-2">Tashio Tempo</h2>
         <p class="text-base mb-4">
-            Tashio Tempo is my new top-down game filled with adventure, magic, and music. The current version features geckos, bats, spell-casting abilities, and several screens to explore!
+            <a href="https://www.github.com/findingfocus/tashio" target="_blank" rel="noopener noreferrer" class="link text-cyan-500 hover:text-cyan-400 transition duration-150">Tashio Tempo</a>
+            is my new top-down game filled with adventure, magic, and music. The current version features geckos, bats, spell-casting abilities, and a dungeon to explore!
         </p>
 
         <!-- Controls panel for md+ screens (hidden on mobile) -->
@@ -61,8 +62,8 @@
         <h2 class="text-xl font-bold mb-3">Joust</h2>
         <p class="text-base">
             My remake of the 1982 Williams Electronics game, Joust. Built in
-            <a href="https://love2d.org" target="_blank" rel="noopener noreferrer" class="link text-cyan-500 hover:text-cyan-400">Love2d</a> with
-            <a href="https://www.lua.org/" target="_blank" rel="noopener noreferrer" class="link">Lua</a>.
+            <a href="https://love2d.org" target="_blank" rel="noopener noreferrer" class="link text-cyan-500 hover:text-cyan-400 transition duration-150">Love2d</a> with
+            <a href="https://www.lua.org/" target="_blank" rel="noopener noreferrer" class="link text-cyan-500 hover:text-cyan-400 transition duration-150">Lua</a>.
             My version comes with 25 waves of enemies, a two-player mode, and a leaderboard!
         </p>
     </div>
@@ -97,7 +98,7 @@
             target="_blank"
             rel="noopener noreferrer"
             title="Joust_win32-v1.1.zip"
-            class="px-2 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <span>Download</span>
         <img class="h-3 w-3 md:w-4 md:h-4" src="images/icons/windows-icon.png" alt="Windows" title="Joust Windows Executable Download">
@@ -108,7 +109,7 @@
             target="_blank"
             rel="noopener noreferrer"
             title="Joust_osx-v1.1.zip"
-            class="px-2 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-black border-2 hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-black border-2 hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <span>Download</span>
         <img class="h-3 w-3 md:w-4 md:h-4" src="images/icons/apple-icon.png" alt="macOS" title="Joust MacOS Executable Download">
@@ -119,7 +120,7 @@
             target="_blank"
             rel="noopener noreferrer"
             title="Joust_linux-v1.1.tar.gz"
-            class="px-2 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-black border-2 hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-black border-2 hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <span>Download</span>
         <img class="h-3 w-3 md:h-4 md:w-4" src="images/icons/linux-icon.png" alt="Linux" title="Joust Linux Executable Download">
@@ -131,12 +132,11 @@
 
 
 <div class="flex justify-center items-center mx-auto mt-6">
-
     <a
             href="https://github.com/findingfocus/tak"
             target="_blank"
             rel="noopener noreferrer"
-            class="mt-2 mx-auto max-w-[500px] block w-[500px] rounded-lg overflow-hidden border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.01] hover:shadow-lg border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+            class="mt-2 mx-auto max-w-[500px] block w-[500px] rounded-lg overflow-hidden border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.01] hover:shadow-lg border-black hover:border-[#434A73] duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <video playsinline autoplay muted loop class="w-[500px] max-w-full rounded-lg shadow-lg">
             <source src="/video/tak.webm" type="video/webm">
@@ -152,7 +152,7 @@
             target="_blank"
             rel="noopener noreferrer"
             title="Tak_win32-v1.0.zip"
-            class="px-2 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <span>Download</span>
         <img class="h-3 w-3 lg:h-4 lg:w-4" src="images/icons/windows-icon.png" alt="Windows" title="Tak Windows Executable Download">
@@ -163,7 +163,7 @@
             target="_blank"
             rel="noopener noreferrer"
             title="Tak_osx-v1.0.zip"
-            class="px-2 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <span>Download</span>
         <img class="h-3 w-3 md:h-4 md:w-4" src="images/icons/apple-icon.png" alt="macOS" title="Tak MacOS Executable Download">
@@ -174,7 +174,7 @@
             rel="noopener noreferrer"
             type="button"
             title="Tak_linux-v1.0.tar.gz"
-            class="px-2 py-2 bg-[#335b7f] text-white rounded hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.025] hover:shadow-lg"
+            class="px-2 py-2 bg-[#335b7f] text-white rounded-xl hover:bg-[#2d4d6e] shadow-xl flex items-center space-x-2 border-2 border-black hover:border-[#434A73] transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
     >
         <span>Download</span>
         <img class="h-3 w-3 md:h-4 md:w-4" src="images/icons/linux-icon.png" alt="Linux" title="Tak Linux Executable Download">

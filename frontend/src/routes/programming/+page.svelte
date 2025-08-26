@@ -76,8 +76,8 @@
 </script>
 
 <h2 class="text-xl font-bold mt-3 mb-2">Saltomanga</h2>
-<p>I developed a website to showcase artwork for <a class="text-cyan-500 hover:text-cyan-400" href="https://saltomanga.com" target="_blank" rel="noopener noreferrer">Saltomanga</a></p>
-<p>Built with SvelteKit 5, Tailwind, PostgreSQL, Nginx, and Docker. We now offer a sticker pack sold in the <a class="text-cyan-500 hover:text-cyan-400" href="https://saltomanga.com/shop" target="_blank" rel="noopener noreferrer">shop</a></p>
+<p>I developed a website to showcase artwork for <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://saltomanga.com" target="_blank" rel="noopener noreferrer">Saltomanga</a></p>
+<p>Built with SvelteKit 5, Tailwind, PostgreSQL, Nginx, and Docker. We now offer a sticker pack sold in the <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://saltomanga.com/shop" target="_blank" rel="noopener noreferrer">shop</a></p>
 <br>
 <a
         href="https://saltomanga.com"
@@ -94,9 +94,9 @@
 <h2 class="text-xl font-bold mb-2 mt-6">No Concessions</h2>
 <div class="flex flex-col md:flex-row gap-4">
     <div class="md:w-1/2">
-        <p>I recently deployed a web application called <a class="text-cyan-500 hover:text-cyan-400" href="https://noconcessions.xyz" target="_blank" rel="noopener noreferrer">No Concessions</a> that allows users to find new movies based on shared taste with other users.</p>
+        <p>I recently built and deployed a web application called <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://noconcessions.xyz" target="_blank" rel="noopener noreferrer">No Concessions</a> that allows users to find new movies based on shared taste with other users.</p>
         <br>
-        <p><a class="text-cyan-500 hover:text-cyan-400" href="https://noconcessions.xyz" target="_blank" rel="noopener noreferrer">Create an account</a> to save movies to your watchlist and get new recommendations. Invite your friends and build out your taste profile.</p>
+        <p><a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://noconcessions.xyz" target="_blank" rel="noopener noreferrer">Create an account</a> to save movies to your watchlist and get new recommendations. Invite your friends and build out your taste profile.</p>
     </div>
 
     <div class="md:w-7/8">
@@ -104,7 +104,7 @@
     </div>
 </div>
 <h2 class="text-xl font-bold mb-2 mt-6">Comic Strip</h2>
-<p>I host my comics on my art website <a class="text-cyan-500 hover:text-cyan-400" href="https://findingfocus.art" target="_blank" rel="noopener noreferrer">findingfocus.art</a></p>
+<p>I host my comics on my art website <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://findingfocus.art" target="_blank" rel="noopener noreferrer">findingfocus.art</a></p>
 <p>The site is built using React, TypeScript, Tailwind, and Nginx with pm2 as the process manager. There are over 300 comics included and some are multi-panel and some are animated.</p>
 <br>
 <div class="flex flex-col md:flex-row gap-6 w-full">
@@ -220,9 +220,8 @@ Enter the duration and filesize of a video to calculate its bitrate with this we
     </div>
 </Card>
 
-
-<h2 class="text-xl font-bold mb-2">Python Application</h2>
-<p>I use this program to format word document files with information making it easier for videographers to do their job. The  <a class="text-cyan-500 hover:text-cyan-400" href="https://trattel.xyz" target="_blank" rel="noopener noreferrer">site</a> is deployed using gunicorn as the WSGI, with Nginx as a reverse proxy handling client requests, providing load balancing, and serving files.</p>
+<h2 class="text-xl font-bold mb-2">Video Worksheet Application</h2>
+<p>I use this python program to format word document files, making it easier for videographers to do their job. The  <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://trattel.xyz" target="_blank" rel="noopener noreferrer">application</a> is deployed using gunicorn as the WSGI, with Nginx as the web server.</p>
 <Code language="python" code={trattelCode} />
 
 <h2 class="text-xl font-bold mt-6 mb-2">SonicPi music for programming</h2>
