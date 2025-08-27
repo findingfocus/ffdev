@@ -1,5 +1,5 @@
 <script>
-    import {onDestroy, onMount} from 'svelte';
+    import { onDestroy, onMount } from 'svelte';
     import { beforeNavigate } from "$app/navigation";
 
     function preventContextMenu(event) {
@@ -16,7 +16,7 @@
             loadingContext.fillStyle = "rgb(0, 0, 27)";
             loadingContext.fillRect(0, 0, canvas.scrollWidth, canvas.scrollHeight);
             loadingContext.font = '1.5em arial';
-            loadingContext.textAlign = 'center'
+            loadingContext.textAlign = 'center';
             loadingContext.fillStyle = "rgb(11, 86, 117)";
             loadingContext.fillText(text, canvas.scrollWidth / 2, canvas.scrollHeight / 2);
             loadingContext.fillText("Powered By Emscripten.", canvas.scrollWidth / 2, canvas.scrollHeight / 4);
@@ -31,10 +31,9 @@
             }
         }, false);
 
-        // Create the Module object with configuration
         window.Module = {
             arguments: ["game.love"],
-            INITIAL_MEMORY: 20971520, // Increased memory (20MB)
+            INITIAL_MEMORY: 20971520,
             printErr: function(text) {
                 console.error('LÖVE Error:', text);
             },
@@ -43,10 +42,6 @@
             },
             canvas: (function() {
                 const canvas = document.getElementById('canvas');
-                // canvas.addEventListener("webglcontextlost", function(e) {
-                //     alert('WebGL context lost. You will need to reload the page.');
-                //     e.preventDefault();
-                // }, false);
                 return canvas;
             })(),
             locateFile: function(path, prefix) {
@@ -68,29 +63,6 @@
                 this.totalDependencies = Math.max(this.totalDependencies, left);
                 window.Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
             },
-            // preRun: [
-            //     function() {
-            //         // Create a virtual file for game.love before the engine starts
-            //         // This is more reliable than depending on love.js to load it
-            //         console.log("Setting up virtual files...");
-            //
-            //         // Create a listener to add the game.love file once FS is available
-            //         Module.preRun.push(function() {
-            //             if (!Module.gameLoveData) {
-            //                 console.error("Game data wasn't loaded correctly!");
-            //                 return;
-            //             }
-            //
-            //             try {
-            //                 // Create game.love in the root directory
-            //                 FS.createDataFile('/', 'game.love', Module.gameLoveData, true, false);
-            //                 console.log("Successfully created game.love in filesystem");
-            //             } catch (e) {
-            //                 console.error("Error creating game.love:", e);
-            //             }
-            //         });
-            //     }
-            // ]
         };
 
         window.Module.setStatus('Downloading...');
@@ -103,7 +75,6 @@
             };
         };
 
-        // Function to load the LÖVE engine
         window.applicationLoad = function() {
             try {
                 console.log("Starting LÖVE engine...");
@@ -113,7 +84,6 @@
             }
         }
 
-        // We need to load the game.love file before loading the scripts
         fetch(basePath + 'game.love')
             .then(response => {
                 if (!response.ok) {
@@ -124,26 +94,17 @@
             })
             .then(buffer => {
                 console.log("game.love downloaded, size:", buffer.byteLength);
-
-                // // Store this for the preRun function
-                // window.Module.gameLoveData = new Uint8Array(buffer);
-
-                // Now load the scripts
                 loadScripts();
             })
             .catch(error => {
                 console.error('Error fetching game.love:', error);
             });
 
-        // Function to load scripts in sequence
         function loadScripts() {
-            // Load game.js first, which contains game data
             const gameScript = document.createElement('script');
             gameScript.src = basePath + "game.js";
             gameScript.onload = () => {
                 console.log("game.js loaded");
-
-                // Then load love.js, which contains the engine
                 const loveScript = document.createElement('script');
                 loveScript.src = basePath + "love.js";
                 loveScript.onload = () => {
@@ -158,29 +119,15 @@
         }
     });
 
-    function stopGame() {
-        try {
-            if (window.Module && typeof window.Module.quit === "function") {
-                const escEvent = new KeyboardEvent("keydown", {
-                    key: "Escape",
-                    keyCode: 27,
-                    code: "Escape",
-                    bubbles: true,
-                    cancelable: true
-                });
-                console.log("Simulating ESC key press");
-                window.dispatchEvent(escEvent);
-            }
-            console.log("LOVE.js game stopped");
-        } catch(e) {
-            console.warn("Error stopping game:", e);
-        }
-    }
+    // Log navigation for debugging
+    beforeNavigate((navigation) => {
+        console.log("Navigation detected, will refresh on destroy...", navigation);
+    });
 
-    // Stop game on navigation
-    const unsubscribe = beforeNavigate(() => stopGame());
+    // Refresh page on component destroy
     onDestroy(() => {
-        stopGame();
+        console.log("Component destroying, refreshing page...");
+        window.location.reload();
     });
 </script>
 

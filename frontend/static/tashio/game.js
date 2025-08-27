@@ -4,40 +4,9 @@ var Module;
 if (typeof Module === 'undefined') Module = eval('(function() { try { return Module || {} } catch(e) { return {} } })()');
 
 if (!Module.expectedDataFileDownloads) {
-    Module.expectedDataFileDownloads = 0;
-    Module.finishedDataFileDownloads = 0;
+  Module.expectedDataFileDownloads = 0;
+  Module.finishedDataFileDownloads = 0;
 }
-
-Module.quit = function() {
-    try {
-        // Stop the main loop if it exists
-        if (typeof Module['_mainLoop'] !== 'undefined' && Module['_mainLoop']) {
-            if (Module['_mainLoop'].pause) Module['_mainLoop'].pause();
-            if (Module['_mainLoop'].stop) Module['_mainLoop'].stop();
-        }
-
-        // Kill WebGL contexts
-        document.querySelectorAll("canvas").forEach(canvas => {
-            try {
-                const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-                if (gl && gl.getExtension("WEBGL_lose_context")) {
-                    gl.getExtension("WEBGL_lose_context").loseContext();
-                }
-                canvas.remove();
-            } catch(e) {}
-        });
-
-        // Kill worker if any
-        if (Module['worker']) {
-            try { Module['worker'].terminate(); } catch(e) {}
-            Module['worker'] = null;
-        }
-
-        console.log("LOVE.js runtime stopped.");
-    } catch (e) {
-        console.error("Error during quit:", e);
-    }
-};
 Module.expectedDataFileDownloads++;
 (function() {
  var loadPackage = function(metadata) {
@@ -315,6 +284,6 @@ Module.expectedDataFileDownloads++;
     }
 
   }
-  loadPackage({"package_uuid":"a7ecb128-a48a-4314-8250-18ac0209f9e1","remote_package_size":5828377,"files":[{"filename":"/game.love","crunched":0,"start":0,"end":5828377,"audio":false}]});
+  loadPackage({"package_uuid":"cc3b5e62-ee9a-42e4-bbab-46b4ba2c75bd","remote_package_size":6694970,"files":[{"filename":"/game.love","crunched":0,"start":0,"end":6694970,"audio":false}]});
 
 })();
