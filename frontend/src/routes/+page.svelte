@@ -33,7 +33,7 @@
     I am analytical, professional, and highly motivated to learn and integrate with a team focused on a digital engineering ecosystem.
 </p>
 <p>
-    C is my favorite programming language, but I use Lua most often when prototyping ideas. I built this website with SvelteKit 5 and TailwindCSS, deployed using docker and nginx. Play demos of my games over on the interactive art page.
+    C is my favorite programming language, but I use Lua most often when prototyping ideas. I built this website with SvelteKit 5 and Tailwind, deployed using docker and nginx. Play demos of my games over on the interactive art page.
 </p>
 
 <div class="mt-6"></div>
