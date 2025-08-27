@@ -1,3 +1,6 @@
+<script>
+</script>
+
 <div class="container mx-auto mb-8">
     <h2 class="text-xl font-bold mb-2">Game Development Streams</h2>
 
@@ -21,7 +24,9 @@
                         src="https://www.youtube.com/embed/playlist?list=PLuMKooiO8m2PN1IuF5Yre405Zv6gfo0w6"
                         title="YouTube video player"
                         frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allow="web-share"
                         allowfullscreen
                         class="absolute inset-0 w-full h-full rounded-lg shadow-lg">
                 </iframe>
@@ -35,7 +40,9 @@
                         src="https://www.youtube.com/embed/playlist?list=PLuMKooiO8m2MymRFuTD5_hfRfX4lRzRkq"
                         title="YouTube video player"
                         frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allow="web-share"
                         allowfullscreen
                         class="absolute inset-0 w-full h-full rounded-lg shadow-lg">
                 </iframe>
@@ -49,7 +56,9 @@
                         src="https://www.youtube.com/embed/playlist?list=PLuMKooiO8m2OqfvDt_FjWNRUUqI3u9IQX"
                         title="YouTube video player"
                         frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allow="web-share"
                         allowfullscreen
                         class="absolute inset-0 w-full h-full rounded-lg shadow-lg">
                 </iframe>
@@ -63,7 +72,9 @@
                         src="https://www.youtube.com/embed/playlist?list=PLuMKooiO8m2NuaJu0DW1Ozowh4MwHO9fg"
                         title="YouTube video player"
                         frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allow="web-share"
                         allowfullscreen
                         class="absolute inset-0 w-full h-full rounded-lg shadow-lg">
                 </iframe>
@@ -77,7 +88,9 @@
                         src="https://www.youtube.com/embed/playlist?list=PLuMKooiO8m2O-HPvf4UmG23ahe1X5PUlg"
                         title="YouTube video player"
                         frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allow="web-share"
                         allowfullscreen
                         class="absolute inset-0 w-full h-full rounded-lg shadow-lg">
                 </iframe>
@@ -91,7 +104,9 @@
                         src="https://www.youtube.com/embed/playlist?list=PLuMKooiO8m2OT8WiAQEq8M45Vjg4SDf8V"
                         title="YouTube video player"
                         frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allow="web-share"
                         allowfullscreen
                         class="absolute inset-0 w-full h-full rounded-lg shadow-lg">
                 </iframe>

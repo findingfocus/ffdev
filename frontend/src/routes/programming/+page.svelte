@@ -100,7 +100,7 @@
     </div>
 
     <div class="md:w-7/8">
-        <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1112629311?badge=0&amp;autoplay=1&amp:title=0&amp;app_id=58479&amp:quality=auto" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="No Concessions - Make connections and get recommendations!"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+        <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1112629311?badge=0&amp;autoplay=1&amp:title=0&amp;app_id=58479&amp:quality=auto" frameborder="0" allow="web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="No Concessions - Make connections and get recommendations!"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
     </div>
 </div>
 <h2 class="text-xl font-bold mb-2 mt-6">Comic Strip</h2>
