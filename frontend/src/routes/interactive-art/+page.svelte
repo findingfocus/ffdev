@@ -1,9 +1,13 @@
 <script>
     import Tashio from '../../lib/components/Tashio.svelte';
-    import {onMount} from "svelte";
+    import { onMount } from "svelte";
+    import { browser } from '$app/environment';
+
+    let showTashio = false;
 
     onMount(() => {
-        // Set up title protection first
+        showTashio = true;
+
         const originalTitle = "Finding Focus";
         const observer = new MutationObserver((mutations) => {
             if (document.title !== originalTitle) {
@@ -65,7 +69,15 @@
     <!-- Right column: Game embed -->
     <div class="flex flex-col items-center">
         <div class="w-full max-w-md">
-            <Tashio />
+            <div class="w-full max-w-md">
+                {#if browser && showTashio}
+                    <Tashio />
+                {:else}
+                    <div class="flex justify-center items-center bg-gray-900 rounded-lg p-4 h-[400px]">
+                        <p class="text-blue-300">Loading Tashio Tempo...</p>
+                    </div>
+                {/if}
+            </div>
         </div>
 
         <!-- Controls panel for mobile (hidden on md+) -->
