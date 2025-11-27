@@ -80,7 +80,7 @@
 			alt="Sandias Mountains"
 			class="fixed top-0 left-0 w-full h-[105vh] object-cover bg-fixed bg-left bg-no-repeat z-0 inset-0 bg-[#0a1b4d]/60 mix-blend-multiply md:translate-y-0 -translate-y-18">
 <!--	<div class="absolute inset-0 bg-[#0a1b4d]/70"></div>-->
-    <div class="fixed top-[-100vh] left-0 right-0 h-[200vh] pointer-events-none z-0 bg-[#0a1b4d]/70 mix-blend-multiply saturate-60"></div>
+    <div class="fixed top-[-100vh] left-0 right-0 h-[200vh] pointer-events-none z-0 bg-[#0a1b4d]/60 mix-blend-multiply saturate-60"></div>
 	<div class="fixed bottom-0 left-0 w-full h-[20vh] bg-gradient-to-t from-black to-transparent pointer-events-none z-10"></div>
 
 
