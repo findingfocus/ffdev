@@ -7,6 +7,7 @@
     let message = '';
     let status = '';
     let type = 'business';
+    let website = '';
 
     async function handleSubmit() {
         try {
@@ -15,7 +16,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, email, message, type })
+                body: JSON.stringify({ name, email, message, type, website})
             });
 
             const result = await response.json();
@@ -42,6 +43,15 @@
                 <span class="block">For business inquiries or general feedback about my work, I'd love to hear from you!</span>
             </p>
             <form on:submit|preventDefault={handleSubmit} class="mt-4 space-y-5">
+                <input
+                        type="text"
+                        name="website"
+                        bind:value={website}
+                        tabindex="-1"
+                        autocomplete="off"
+                        aria-hidden="true"
+                        style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"
+                />
                 <div>
                     <select
                             bind:value={type}

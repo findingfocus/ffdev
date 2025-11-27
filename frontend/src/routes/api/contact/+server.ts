@@ -12,10 +12,16 @@ const transporter = nodemailer.createTransport({
 
 export const POST: RequestHandler = async ({ request }) => {
     try {
-      const { name, email, message, type } = await request.json();
-      const label = type === 'business' ? `Business Inquiry from ${name}` : `Feedback from ${name}`;
+        const body = await request.json();
 
-    const emailContent = `
+        if (body?.website) {
+            return json({ success: true });
+        }
+
+        const { name, email, message, type } = body;
+        const label = type === 'business' ? `Business Inquiry from ${name}` : `Feedback from ${name}`;
+
+        const emailContent = `
         <img src="https://res.cloudinary.com/dh8nskoaz/image/upload/v1755917757/ffEmailLogo_qdmub9.png" 
              alt="FindingFocus" 
              style="display: block; max-height: 100px; width: auto;"
