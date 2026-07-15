@@ -91,18 +91,6 @@
             src="https://res.cloudinary.com/dh8nskoaz/image/upload/v1756010386/saltomanga_lo6yyf.webp"
     >
 </a>
-<h2 class="text-xl font-bold mb-2 mt-6">No Concessions</h2>
-<div class="flex flex-col md:flex-row gap-4">
-    <div class="md:w-1/2">
-        <p>I recently built and deployed a web application called <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://noconcessions.xyz" target="_blank" rel="noopener noreferrer">No Concessions</a> that allows users to find new movies based on shared taste with other users.</p>
-        <br>
-        <p><a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://noconcessions.xyz" target="_blank" rel="noopener noreferrer">Create an account</a> to save movies to your watchlist and get new recommendations. Invite your friends and build out your taste profile.</p>
-    </div>
-
-    <div class="md:w-7/8">
-        <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1112629311?badge=0&amp;autoplay=1&amp:title=0&amp;app_id=58479&amp:quality=auto" frameborder="0" allow="web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="No Concessions - Make connections and get recommendations!"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-    </div>
-</div>
 <h2 class="text-xl font-bold mb-2 mt-6">Comic Strip</h2>
 <p>I host my comics on my art website <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://findingfocus.art" target="_blank" rel="noopener noreferrer">findingfocus.art</a></p>
 <p>The site is built using React, TypeScript, Tailwind, and Nginx with pm2 as the process manager. There are over 300 comics included and some are multi-panel and some are animated.</p>
