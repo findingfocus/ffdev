@@ -73,24 +73,46 @@
     import trattelCode from '$lib/code/trattel.py?raw';
     import sonicPiCode from '$lib/code/sonicPi.rb?raw';
     import artistPrayerCode from '$lib/code/artistPrayer.c?raw';
+    let loaded = $state(false);
 </script>
 
 <h2 class="text-xl font-bold mb-2">Saltomanga</h2>
 <p>I developed a website to showcase artwork for <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://saltomanga.com" target="_blank" rel="noopener noreferrer">Saltomanga</a></p>
 <p>Built with SvelteKit 5, Tailwind, PostgreSQL, Nginx, and Docker. We now offer a sticker pack sold in the <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://saltomanga.com/shop" target="_blank" rel="noopener noreferrer">shop</a></p>
 <br>
+<svelte:head>
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link
+            rel="preload"
+            as="image"
+            href="https://res.cloudinary.com/dh8nskoaz/image/upload/f_auto,q_auto,w_1200/v1756010386/saltomanga_lo6yyf.webp"
+    />
+</svelte:head>
 <a
         href="https://saltomanga.com"
         target="_blank"
         rel="noopener noreferrer"
         class="block w-full rounded-lg overflow-hidden border-2 border-black hover:border-[#335b7f] transition-transform duration-300 hover:scale-[1.01] hover:shadow-lg"
 >
-    <img
-            class="w-full rounded-lg"
-            alt="Saltomanga website"
-            src="https://res.cloudinary.com/dh8nskoaz/image/upload/v1756010386/saltomanga_lo6yyf.webp"
-    >
-</a>
+    <div class="relative w-full rounded-lg overflow-hidden">
+        <img
+                src="https://res.cloudinary.com/dh8nskoaz/image/upload/f_auto,q_auto,e_blur:1000,w_50/v1756010386/saltomanga_lo6yyf.webp"
+                alt=""
+                class="absolute inset-0 w-full h-full object-cover scale-110 transition-opacity duration-300"
+                class:opacity-0={loaded}
+                aria-hidden="true"
+        />
+        <img
+                src="https://res.cloudinary.com/dh8nskoaz/image/upload/f_auto,q_auto,w_1200/v1756010386/saltomanga_lo6yyf.webp"
+                alt="Saltomanga website"
+                width="1196"
+                height="673"
+                class="relative w-full rounded-lg transition-opacity duration-300"
+                class:opacity-0={!loaded}
+                onload={() => loaded = true}
+                fetchpriority="high"
+        />
+    </div></a>
 <h2 class="text-xl font-bold mb-2 mt-6">Comic Strip</h2>
 <p>I host my comics on my art website <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://findingfocus.art" target="_blank" rel="noopener noreferrer">findingfocus.art</a></p>
 <p>The site is built using React, TypeScript, Tailwind, and Nginx with pm2 as the process manager. There are over 300 comics included and some are multi-panel and some are animated.</p>
