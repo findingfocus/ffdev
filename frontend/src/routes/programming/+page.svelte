@@ -78,13 +78,14 @@
 
 <h2 class="text-xl font-bold mb-2">Saltomanga</h2>
 <p>I developed a website to showcase artwork for <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://saltomanga.com" target="_blank" rel="noopener noreferrer">Saltomanga</a></p>
-<p>Built with SvelteKit 5, Tailwind, PostgreSQL, Nginx, and Docker. We now offer a sticker pack sold in the <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://saltomanga.com/shop" target="_blank" rel="noopener noreferrer">shop</a></p>
+<p>Built with SvelteKit 5, Stripe, SQLite, Nginx, and Docker. We now offer a sticker pack sold in the <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://saltomanga.com/shop" target="_blank" rel="noopener noreferrer">shop</a></p>
 <br>
 <svelte:head>
-    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link rel="preconnect" href="https://res.cloudinary.com"/>
     <link
             rel="preload"
             as="image"
+            fetchpriority="high"
             href="https://res.cloudinary.com/dh8nskoaz/image/upload/f_auto,q_auto,w_1200/v1756010386/saltomanga_lo6yyf.webp"
     />
 </svelte:head>
@@ -115,7 +116,7 @@
     </div></a>
 <h2 class="text-xl font-bold mb-2 mt-6">Comic Strip</h2>
 <p>I host my comics on my art website <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://findingfocus.art" target="_blank" rel="noopener noreferrer">findingfocus.art</a></p>
-<p>The site is built using React, TypeScript, Tailwind, and Nginx with pm2 as the process manager. There are over 300 comics included and some are multi-panel and some are animated.</p>
+<p>The site is built using React, TypeScript, Tailwind, deployed with Nginx and Docker. There are over 300 comics included and some are multi-panel and some are animated.</p>
 <br>
 <div class="flex flex-col md:flex-row gap-6 w-full">
     <a
@@ -231,7 +232,7 @@ Enter the duration and filesize of a video to calculate its bitrate with this we
 </Card>
 
 <h2 class="text-xl font-bold mb-2">Video Worksheet Application</h2>
-<p>I use this python program to format word document files, making it easier for videographers to do their job. The  <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://trattel.xyz" target="_blank" rel="noopener noreferrer">application</a> is deployed using gunicorn as the WSGI, with Nginx as the web server.</p>
+<p>I wrote this python program to format word document files, making it easier for videographers to do their job. The  <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://trattel.xyz" target="_blank" rel="noopener noreferrer">application</a> is deployed using gunicorn as the WSGI, with Nginx as the web server.</p>
 <Code language="python" code={trattelCode} />
 
 <h2 class="text-xl font-bold mt-6 mb-2">SonicPi music for programming</h2>

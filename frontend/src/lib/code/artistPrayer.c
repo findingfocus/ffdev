@@ -21,7 +21,6 @@ const char *Prayer[] = {
 "O Great Muse",
 "Gift us with your presence",
 "And we shall commit to the work of showing up",
-"Let us handle the quantity, and you handle the quality",
 "Help us love ourselves so we can love others",
 "Help us grow so we can help others grow",
 "Please alert us when we are on the wrong path",

@@ -27,13 +27,13 @@
 
 
 <p>
-    My name is Paul Thompson, I am an interdisciplinary artist interested in developing software solutions and interactive art.
+    My name is Paul Thompson. I am a hardware technician and developer focused on building interactive systems and multi-platform applications.
 </p>
 <p>
-    I am analytical, professional, and highly motivated to learn and integrate with a team focused on a digital engineering ecosystem.
+    My background spans hardware integration, Linux administration, and full-stack development grounded in terminal fluency and systematic troubleshooting.
 </p>
 <p>
-    C is my favorite programming language, but I use Lua most often when prototyping ideas. I built this website with SvelteKit 5 and Tailwind, deployed using docker and nginx. Play demos of my games over on the interactive art page.
+    I use Lua for rapid prototyping and Bash for my workflow tooling. I built this site using SvelteKit 5 and Tailwind, containerized with Docker and hosted via Nginx on Linux. Explore my work and software projects on the interactive art page.
 </p>
 
 <div class="mt-6"></div>
@@ -52,7 +52,7 @@
 <div class="mt-8"></div>
 <p class="italic">Harvard's CS50x: CS50's Introduction to Computer Science</p>
 <div class="mx-auto text-center mt-5 max-w-2xl mb-8 border-2 border-black hover:border-[#335b7f] transition-transform duration-300 hover:scale-[1.01] hover:shadow-lg">
-    <a href="https://certifications.cnm.edu/certificate/d9358ee5c01351c4a8c1ec16d0eb7288">
+    <a href="https://courses.edx.org/certificates/eb843c36ff1d4bd5bfde1bbfdb9925b3">
         <img src="images/CS50xCertificate.png" class="w-full " alt="Deep Dive Full Stack Blockchain Certificate">
     </a>
 </div>
