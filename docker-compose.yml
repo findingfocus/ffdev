@@ -1,0 +1,15 @@
+services:
+  ffdev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+    image: findingfocusdev/ffdev:latest
+    container_name: ffdev
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}

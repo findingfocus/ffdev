@@ -18,7 +18,7 @@ RUN npm run build
 RUN npm prune --production
 
 # Production stage
-FROM node:20-alpine AS production
+FROM node:22-alpine AS production
 
 # Set working directory
 WORKDIR /app
