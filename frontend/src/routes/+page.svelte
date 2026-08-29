@@ -1,4 +1,5 @@
 <script>
+    import Link from '$lib/components/Link.svelte';
 </script>
 
 <h2 class="text-xl font-bold mb-2">About Me</h2>
@@ -27,13 +28,11 @@
 
 
 <p>
-    My name is Paul Thompson. I am a hardware technician and developer focused on building interactive systems and multi-platform applications.
+    My name is Paul Thompson, I am a <Link href="https://ideum.com/team/paul-thompson">hardware technician</Link> and <Link href="https://github.com/findingfocus">software developer</Link> focused on crafting interactive art experiences. I am currently programming <Link href="https://tashio.dev">Tashio Tempo</Link> live on <Link href="https://twitch.tv/findingfocusdev">Twitch</Link> and <Link href="https://youtube.com/findingfocus">Youtube</Link>.
 </p>
+<br>
 <p>
-    My background spans hardware integration, Linux administration, and full-stack development grounded in terminal fluency and systematic troubleshooting.
-</p>
-<p>
-    I use Lua for rapid prototyping and Bash for my workflow tooling. I built this site using SvelteKit 5 and Tailwind, containerized with Docker and hosted via Nginx on Linux. Explore my work and software projects on the interactive art page.
+    I believe there should be no barrier to entry in experiencing art. I host my game's <Link href="https://tashio.findingfocus.io">source code</Link> so that anyone can play on Linux, Mac, or Windows. Play the demo and wishlist the game now on <Link href="https://steam.tashio.dev">Steam</Link>.
 </p>
 
 <div class="mt-6"></div>
