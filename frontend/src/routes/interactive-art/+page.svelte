@@ -94,6 +94,12 @@
     </div>
 </div>
 
+<iframe
+        src="https://store.steampowered.com/widget/4316650/"
+        frameborder="0"
+        style="width: 100%; max-width: 646px; height: 190px; border: 0;">
+</iframe>
+
 <div class="lg:grid lg:grid-cols-2 lg:gap-12 mt-6 lg:mt-24">
     <!-- Left column: Game description -->
     <div class="mb-6 lg:mb-0">
