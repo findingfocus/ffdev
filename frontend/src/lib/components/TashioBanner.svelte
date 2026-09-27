@@ -78,6 +78,15 @@
 	let glError: string | null = $state(null);
 	let ready = $state(false); // all art uploaded -> fade canvas in, fade placeholder out
 	let savedMsg = $state('');
+	// first-tap click suppression (iOS): the priming tap stays on the page for
+	// the motion prompt; every later tap navigates natively (same-tab: no blank tab possible).
+	let suppressNextClick = false;
+	function handleLinkClick(e: MouseEvent) {
+		if (suppressNextClick) {
+			suppressNextClick = false;
+			e.preventDefault();
+		}
+	}
 	const STORE_KEY = 'tashioBanner.settings.v3';
 	const NUM_KEYS = ['clouds', 'pixels', 'crunch', 'frame', 'bgDim', 'swagger', 'tashioX', 'tashioSize', 'cornerX', 'cornerY', 'cornerDark', 'tint', 'tintAmt'] as const;
 
@@ -514,19 +523,22 @@
 				requestPermission?: () => Promise<string>;
 			};
 			// Android & co: no permission gate, tilt just works. iOS asks on
-			// pointerdown — a valid gesture that never interferes with the
-			// native anchor click, so navigation always works.
+			// pointerdown — a valid gesture that never interferes with clicks.
 			if (typeof doe.requestPermission !== 'function') {
 				enableGyro();
 			} else {
-				const primeOnce = () => {
-					banner.removeEventListener('pointerdown', primeOnce);
-					void primeMotion();
+				let primed = false;
+				const onPointerDown = () => {
+					if (!primed) {
+						primed = true;
+						suppressNextClick = true;
+						void primeMotion();
+					} else {
+						suppressNextClick = false;
+					}
 				};
-				banner.addEventListener('pointerdown', primeOnce);
+				banner.addEventListener('pointerdown', onPointerDown);
 			}
-		} else {
-			console.log('[TashioBanner] gyro skipped, coarse=', matchMedia('(pointer: coarse)').matches);
 		}
 
 		function makeTex() {
@@ -660,7 +672,7 @@
 		</div>
 	{/snippet}
 	{#if href}
-		<a class="tb-link" {href} aria-label="Tashio Tempo on Steam">{@render bannerBox()}</a>
+		<a class="tb-link" {href} aria-label="Tashio Tempo on Steam" onclick={handleLinkClick}>{@render bannerBox()}</a>
 	{:else}
 		{@render bannerBox()}
 	{/if}
