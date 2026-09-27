@@ -8,6 +8,8 @@
 		bgSrc?: string;
 		logoSrc?: string;
 		tashioSrc?: string;
+		/** optional prefiltered cutout used only on coarse-pointer/mobile devices */
+		mobileTashioSrc?: string;
 		/** banner height, any CSS value */
 		height?: string;
 		/** top-third cloud drift, 0..1.5 */
@@ -45,6 +47,7 @@
 		bgSrc = '/banner/volcano.webp',
 		logoSrc = '/banner/logo.webp',
 		tashioSrc = '/banner/tashio.webp',
+		mobileTashioSrc = '/banner/tashio-mobile.webp',
 		height = '460px',
 		clouds = 0.1,
 		pixels = 4,
@@ -351,7 +354,8 @@
 
       // tashio first (behind the logo bed)
       float breathe = sin(t*1.3+1.0);
-      vec2 tashBob = vec2(0.004*sin(t*0.9), 0.008*breathe);
+      // Keep mobile still at rest; desktop retains the subtle idle bob.
+      vec2 tashBob = vec2(0.004*sin(t*0.9), 0.008*breathe) * (1.0 - narrow);
       float tashS = tashScaleEff;
       vec2 tashOff = vec2(uFgX*0.060, uFgY*0.035)*uSwagger;
       vec4 ta = sampleLayer(uTashio, uTashioSize, tashPosEff + tashBob, tashS, tashOff);
@@ -593,7 +597,8 @@
 		// NOTE: reads props once at mount; changing src props remounts via {#key} in parent.
 		load(bgSrc, texBg, 'bg', 0);
 		load(logoSrc, texLogo, 'logo', 1);
-		load(tashioSrc, texTash, 'tash', 2);
+		const effectiveTashioSrc = matchMedia('(pointer: coarse)').matches ? mobileTashioSrc : tashioSrc;
+		load(effectiveTashioSrc, texTash, 'tash', 2);
 
 		const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 		let bgW = 0, bgH = 0;
