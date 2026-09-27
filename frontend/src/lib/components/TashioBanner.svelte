@@ -346,13 +346,13 @@
       float narrow = 1.0 - smoothstep(0.9, 1.35, ca);
       float tashScaleEff = uTashioScale * mix(1.0, 0.55, narrow);
       vec2 tashPosEff = uTashioPos + vec2(mix(0.0, 0.03, narrow), mix(0.0, -0.20, narrow));
-      float logoScaleEff = uLogoScale * mix(1.0, 0.58, narrow);
-      vec2 logoPosEff = uLogoPos + vec2(mix(0.0, 0.11, narrow), 0.0);
+      float logoScaleEff = uLogoScale * mix(1.0, 0.625, narrow);
+      vec2 logoPosEff = uLogoPos + vec2(mix(0.0, 0.12, narrow), 0.0);
 
       // tashio first (behind the logo bed)
       float breathe = sin(t*1.3+1.0);
       vec2 tashBob = vec2(0.004*sin(t*0.9), 0.008*breathe);
-      float tashS = tashScaleEff*(1.0 + 0.008*breathe);
+      float tashS = tashScaleEff;
       vec2 tashOff = vec2(uFgX*0.060, uFgY*0.035)*uSwagger;
       vec4 ta = sampleLayer(uTashio, uTashioSize, tashPosEff + tashBob, tashS, tashOff);
       col = mix(col, ta.rgb, ta.a);
