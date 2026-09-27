@@ -52,7 +52,7 @@
 		frame = 0.17,
 		bgDim = 0.58,
 		swagger = 1.0,
-		tashioX = 0.78,
+		tashioX = 0.72,
 		tashioSize = 1.15,
 		cornerX = 0.8,
 		cornerY = 0.66,
@@ -95,7 +95,7 @@
 			requestMotion();
 		}
 	}
-	const STORE_KEY = 'tashioBanner.settings.v2';
+	const STORE_KEY = 'tashioBanner.settings.v3';
 	const NUM_KEYS = ['clouds', 'pixels', 'crunch', 'frame', 'bgDim', 'swagger', 'tashioX', 'tashioSize', 'cornerX', 'cornerY', 'cornerDark', 'tint', 'tintAmt'] as const;
 
 	function flash(msg: string) {
@@ -364,10 +364,10 @@
         vec2 tc = tashPosEff + tashBob + tashOff;
         vec2 tauv = vec2((vUv.x - tc.x) / (tashS*tla/ca) + 0.5, (vUv.y - tc.y) / tashS + 0.5);
         vec2 g = vec2(0.43, 0.31);
-        float pulse = 0.5 + 0.5*sin(tBg*2.2);
+        float pulse = 0.5 + 0.5*sin(tBg*3.2);
         float d2 = dot(tauv-g, (tauv-g)*vec2(1.6,1.0));
         float inside = step(0.0,tauv.x)*step(tauv.x,1.0)*step(0.0,tauv.y)*step(tauv.y,1.0);
-        col += vec3(1.0,0.82,0.45) * exp(-d2*90.0) * (0.30+0.22*pulse) * inside * ta.a;
+        col += vec3(1.0,0.82,0.45) * exp(-d2*90.0) * (0.18+0.45*pulse) * inside * ta.a;
       }
 
       // black feathered corner over bg AND tashio: the logo bed, always readable
@@ -502,8 +502,8 @@
 				const m = Math.max(0, (Math.abs(d) - TILT_DEAD) / (TILT_RANGE - TILT_DEAD));
 				return Math.max(-1, Math.min(1, m * Math.sign(d)));
 			};
-			tParX = shape(x - gyroBase.x);
-			tParY = shape(y - gyroBase.y);
+			tParX = -shape(x - gyroBase.x);
+			tParY = -shape(y - gyroBase.y);
 			lastMove = performance.now();
 		}
 		let gyroOn = false;
