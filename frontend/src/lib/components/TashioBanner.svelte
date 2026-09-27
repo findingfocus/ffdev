@@ -78,6 +78,23 @@
 	let glError: string | null = $state(null);
 	let ready = $state(false); // all art uploaded -> fade canvas in, fade placeholder out
 	let savedMsg = $state('');
+	// iOS motion gating for the link wrapper: first tap arms gyro, later taps navigate.
+	let motionPrimed = $state(false);
+	let requestMotion: (() => void) | null = null;
+	function needsMotionPriming(): boolean {
+		if (typeof DeviceOrientationEvent === 'undefined') return false;
+		const doe = DeviceOrientationEvent as unknown as {
+			requestPermission?: () => Promise<string>;
+		};
+		return typeof doe.requestPermission === 'function' && matchMedia('(pointer: coarse)').matches;
+	}
+	function handleLinkClick(e: MouseEvent) {
+		if (!motionPrimed && needsMotionPriming() && requestMotion) {
+			e.preventDefault();
+			motionPrimed = true;
+			requestMotion();
+		}
+	}
 	const STORE_KEY = 'tashioBanner.settings.v2';
 	const NUM_KEYS = ['clouds', 'pixels', 'crunch', 'frame', 'bgDim', 'swagger', 'tashioX', 'tashioSize', 'cornerX', 'cornerY', 'cornerDark', 'tint', 'tintAmt'] as const;
 
@@ -513,11 +530,13 @@
 			const doe = DeviceOrientationEvent as unknown as {
 				requestPermission?: () => Promise<string>;
 			};
-			// Android & co: no permission gate, tilt just works. iOS waits for first tap.
+			// Android & co: no permission gate, tilt just works. iOS arms on first link tap.
 			if (typeof doe.requestPermission !== 'function') {
 				enableGyro();
 			} else {
-				banner.addEventListener('pointerdown', primeMotion, { once: true });
+				requestMotion = () => {
+					void primeMotion();
+				};
 			}
 		} else {
 			console.log('[TashioBanner] gyro skipped, coarse=', matchMedia('(pointer: coarse)').matches);
@@ -628,7 +647,6 @@
 		return () => {
 			cancelAnimationFrame(raf);
 			banner.removeEventListener('pointermove', onMove);
-			banner.removeEventListener('pointerdown', primeMotion);
 			window.removeEventListener('deviceorientation', onTilt);
 			ctx.getExtension('WEBGL_lose_context')?.loseContext();
 		};
@@ -655,7 +673,7 @@
 		</div>
 	{/snippet}
 	{#if href}
-		<a class="tb-link" {href} target="_blank" rel="noopener noreferrer" aria-label="Tashio Tempo on Steam">{@render bannerBox()}</a>
+		<a class="tb-link" {href} target="_blank" rel="noopener noreferrer" aria-label="Tashio Tempo on Steam" onclick={handleLinkClick}>{@render bannerBox()}</a>
 	{:else}
 		{@render bannerBox()}
 	{/if}
