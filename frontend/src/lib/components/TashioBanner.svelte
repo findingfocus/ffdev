@@ -503,7 +503,7 @@
 				return Math.max(-1, Math.min(1, m * Math.sign(d)));
 			};
 			tParX = -shape(x - gyroBase.x);
-			tParY = -shape(y - gyroBase.y);
+			tParY = shape(y - gyroBase.y);
 			lastMove = performance.now();
 		}
 		let gyroOn = false;
