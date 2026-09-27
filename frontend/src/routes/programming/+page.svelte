@@ -77,10 +77,10 @@
     let loaded = $state(false);
 </script>
 
-<div class="mb-8 rounded-lg overflow-hidden border-2 border-black">
+<div class="mb-8 rounded-lg overflow-hidden border-2 border-black hover:border-[#335b7f] transition-all duration-300 hover:scale-[1.01] hover:shadow-lg">
     <TashioBanner
         bgSrc="/banner/volcano.webp"
-        logoSrc="/banner/logo.webp"
+        logoSrc="/banner/logoFire.webp"
         tashioSrc="/banner/tashio.webp"
         height="420px"
     />
