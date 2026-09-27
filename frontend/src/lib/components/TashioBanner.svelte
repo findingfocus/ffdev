@@ -249,7 +249,7 @@
 
       // daytime eruption plume (crater ~0.52, ~0.79, v=1 top)
       if (uSmokeOn > 0.5) {
-        vec2 mouth = vec2(0.52, 0.79);
+        vec2 mouth = vec2(0.529, 0.80);
         float flick = 0.62 + 0.24*sin(t*7.0) + 0.14*sin(t*13.7+1.3);
         float h = imgUV.y - mouth.y;
         float colX = mouth.x + h*0.35 + 0.008*sin(t*0.9 + imgUV.y*14.0);
@@ -264,12 +264,13 @@
         vec3 ashHot  = vec3(1.10, 0.52, 0.12);
         vec3 ash = mix(ashHot, ashCold, smoothstep(0.0, 0.20, h));
         col = mix(col, ash * (0.55 + 0.45*light), clamp(plume*1.15, 0.0, 1.0)*0.7);
+        // Half-strength crater light and embers.
         float lip = exp(-pow(distance(imgUV, mouth)*30.0, 2.0));
         float core = exp(-pow(distance(imgUV, mouth + vec2(0.0,-0.008))*55.0, 2.0));
-        col += vec3(1.0, 0.30, 0.06) * lip * (0.22 + 0.20*flick);
-        col += vec3(1.0, 0.62, 0.20) * core * (0.45 + 0.28*flick);
+        col += vec3(1.0, 0.30, 0.06) * lip * (0.11 + 0.10*flick);
+        col += vec3(1.0, 0.62, 0.20) * core * (0.225 + 0.14*flick);
         float spill = exp(-pow(distance(imgUV, mouth)*7.0, 2.0));
-        col += vec3(0.55, 0.16, 0.04) * spill * (0.10 + 0.08*flick);
+        col += vec3(0.55, 0.16, 0.04) * spill * (0.05 + 0.04*flick);
         for (int i = 0; i < 5; i++) {
           float fi = float(i);
           float sd = hash(vec2(fi*7.31, 3.7));
@@ -279,7 +280,7 @@
           float tw = 0.5 + 0.5*sin(t*(6.0+sd*8.0) + fi*17.0);
           float fade = (1.0-cyc)*(1.0-cyc);
           float d = distance(imgUV, sp);
-          col += vec3(1.0, 0.45, 0.10) * exp(-d*d*9000.0) * fade * (0.18+0.28*tw);
+          col += vec3(1.0, 0.45, 0.10) * exp(-d*d*9000.0) * fade * (0.09+0.14*tw);
         }
       }
 
