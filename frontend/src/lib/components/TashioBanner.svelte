@@ -319,29 +319,28 @@
     void main(){
       float t = uTime;
       float tBg = uTimeBg;
+      float ca = uResolution.x / max(uResolution.y, 1.0);
       vec3 col = texture2D(uBg, vUv).rgb;
 
-      // black feathered corner, bottom-left: logo sits on this, always readable
-      float corner = (1.0 - smoothstep(0.0, uCorner.x, vUv.x)) * (1.0 - smoothstep(0.0, uCorner.y, vUv.y));
-      col = mix(col, vec3(0.0), corner*uCorner.z);
+      // responsive reframe: 1 on narrow phones, 0 on desktop (blends across tablets)
+      float narrow = 1.0 - smoothstep(0.9, 1.35, ca);
+      float tashScaleEff = uTashioScale * mix(1.0, 0.55, narrow);
+      vec2 tashPosEff = uTashioPos + vec2(mix(0.0, 0.03, narrow), mix(0.0, -0.20, narrow));
+      float logoScaleEff = uLogoScale * mix(1.0, 0.65, narrow);
+      vec2 logoPosEff = uLogoPos + vec2(mix(0.0, 0.08, narrow), 0.0);
 
-      // logo: pinned static, crisp, untouched by scene lighting
-      vec4 lg = sampleLayer(uLogo, uLogoSize, uLogoPos, uLogoScale, vec2(0.0, 0.0));
-      col = mix(col, lg.rgb, lg.a);
-
-      // tashio: breathing bob + scale pulse, looms with mouse, crisp
+      // tashio first (behind the logo bed)
       float breathe = sin(t*1.3+1.0);
       vec2 tashBob = vec2(0.004*sin(t*0.9), 0.008*breathe);
-      float tashS = uTashioScale*(1.0 + 0.008*breathe);
+      float tashS = tashScaleEff*(1.0 + 0.008*breathe);
       vec2 tashOff = vec2(uFgX*0.060, uFgY*0.035)*uSwagger;
-      vec4 ta = sampleLayer(uTashio, uTashioSize, uTashioPos + tashBob, tashS, tashOff);
+      vec4 ta = sampleLayer(uTashio, uTashioSize, tashPosEff + tashBob, tashS, tashOff);
       col = mix(col, ta.rgb, ta.a);
 
       // lute glow rides tashio's layer (sound-hole ~0.43, ~0.31 in his image space)
       if (uGlowOn > 0.5) {
-        float ca = uResolution.x / max(uResolution.y, 1.0);
         float tla = uTashioSize.x / max(uTashioSize.y, 1.0);
-        vec2 tc = uTashioPos + tashBob + tashOff;
+        vec2 tc = tashPosEff + tashBob + tashOff;
         vec2 tauv = vec2((vUv.x - tc.x) / (tashS*tla/ca) + 0.5, (vUv.y - tc.y) / tashS + 0.5);
         vec2 g = vec2(0.43, 0.31);
         float pulse = 0.5 + 0.5*sin(tBg*2.2);
@@ -349,6 +348,15 @@
         float inside = step(0.0,tauv.x)*step(tauv.x,1.0)*step(0.0,tauv.y)*step(tauv.y,1.0);
         col += vec3(1.0,0.82,0.45) * exp(-d2*90.0) * (0.30+0.22*pulse) * inside * ta.a;
       }
+
+      // black feathered corner over bg AND tashio: the logo bed, always readable
+      float corner = (1.0 - smoothstep(0.0, uCorner.x, vUv.x)) * (1.0 - smoothstep(0.0, uCorner.y, vUv.y));
+      col = mix(col, vec3(0.0), corner*uCorner.z);
+
+      // logo LAST: always front, crisp, untouched by scene lighting
+      vec4 lg = sampleLayer(uLogo, uLogoSize, logoPosEff, logoScaleEff, vec2(0.0, 0.0));
+      col = mix(col, lg.rgb, lg.a);
+
       gl_FragColor = vec4(col, 1.0);
     }`;
 
