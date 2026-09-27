@@ -660,7 +660,7 @@
 		</div>
 	{/snippet}
 	{#if href}
-		<a class="tb-link" {href} target="_blank" rel="noopener noreferrer" aria-label="Tashio Tempo on Steam">{@render bannerBox()}</a>
+		<a class="tb-link" {href} aria-label="Tashio Tempo on Steam">{@render bannerBox()}</a>
 	{:else}
 		{@render bannerBox()}
 	{/if}
