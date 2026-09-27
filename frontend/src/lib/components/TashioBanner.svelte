@@ -31,6 +31,8 @@
 		cornerDark?: number;
 		luteGlow?: boolean;
 		ashPlume?: boolean;
+		/** link the whole banner box out (target _blank, noopener noreferrer). Pass "" to disable. */
+		href?: string;
 		/** bg duotone experiment: 0 off, 1 red, 2 blue, 3 purple */
 		tint?: number;
 		/** duotone strength, 0..1 */
@@ -57,6 +59,7 @@
 		cornerDark = 0.85,
 		luteGlow = true,
 		ashPlume = true,
+		href = 'https://steam.tashio.dev',
 		tint = 3,
 		tintAmt = 0.27,
 		controls = false
@@ -139,6 +142,7 @@
 			`  cornerDark={${s.cornerDark.toFixed(2)}}\n` +
 			`  luteGlow={${s.luteGlow}}\n` +
 			`  ashPlume={${s.ashPlume}}\n` +
+			`  href="${href}"\n` +
 			`  tint={${s.tint.toFixed(0)}}\n` +
 			`  tintAmt={${s.tintAmt.toFixed(2)}}\n` +
 			`/>`;
@@ -459,6 +463,66 @@
 		}
 		banner.addEventListener('pointermove', onMove);
 
+		// --- gyroscope parallax (mobile): tilt drives the same targets as the mouse ---
+		const TILT_RANGE = 20; // degrees of tilt for full deflection
+		const TILT_DEAD = 1.5; // degrees of stillness around level
+		let gyroBase: { x: number; y: number; angle: number } | null = null;
+		function orientXY(beta: number, gamma: number, angle: number): [number, number] {
+			if (angle === 90) return [beta, -gamma];
+			if (angle === 270) return [-beta, gamma];
+			if (angle === 180) return [-gamma, -beta];
+			return [gamma, beta];
+		}
+		function onTilt(e: DeviceOrientationEvent) {
+			if (e.beta == null || e.gamma == null) return;
+			const angle = (((screen.orientation?.angle ?? 0) % 360) + 360) % 360;
+			const [x, y] = orientXY(e.beta, e.gamma, angle);
+			if (!gyroBase || gyroBase.angle !== angle) {
+				gyroBase = { x, y, angle }; // calibrate level on first read / rotation
+				return;
+			}
+			const shape = (d: number) => {
+				const m = Math.max(0, (Math.abs(d) - TILT_DEAD) / (TILT_RANGE - TILT_DEAD));
+				return Math.max(-1, Math.min(1, m * Math.sign(d)));
+			};
+			tParX = shape(x - gyroBase.x);
+			tParY = shape(y - gyroBase.y);
+			lastMove = performance.now();
+		}
+		let gyroOn = false;
+		function enableGyro() {
+			if (gyroOn || typeof DeviceOrientationEvent === 'undefined') return;
+			if (!matchMedia('(pointer: coarse)').matches) return;
+			window.addEventListener('deviceorientation', onTilt);
+			gyroOn = true;
+		}
+		async function primeMotion() {
+			try {
+				const doe = DeviceOrientationEvent as unknown as {
+					requestPermission?: () => Promise<string>;
+				};
+				if (typeof doe.requestPermission === 'function') {
+					if ((await doe.requestPermission()) !== 'granted') return;
+				}
+			} catch {
+				return;
+			}
+			enableGyro();
+		}
+		if (matchMedia('(pointer: coarse)').matches && typeof DeviceOrientationEvent !== 'undefined') {
+			const doe = DeviceOrientationEvent as unknown as {
+				requestPermission?: () => Promise<string>;
+			};
+			// Android & co: no permission gate, tilt just works. iOS waits for first tap.
+			if (typeof doe.requestPermission !== 'function') {
+				enableGyro();
+			} else {
+				banner.addEventListener('pointerdown', primeMotion, { once: true });
+			}
+		} else {
+			console.log('[TashioBanner] gyro skipped, coarse=', matchMedia('(pointer: coarse)').matches);
+		}
+
 		function makeTex() {
 			const tex = ctx.createTexture();
 			ctx.bindTexture(ctx.TEXTURE_2D, tex);
@@ -564,6 +628,8 @@
 		return () => {
 			cancelAnimationFrame(raf);
 			banner.removeEventListener('pointermove', onMove);
+			banner.removeEventListener('pointerdown', primeMotion);
+			window.removeEventListener('deviceorientation', onTilt);
 			ctx.getExtension('WEBGL_lose_context')?.loseContext();
 		};
 		} catch (e) {
@@ -575,17 +641,24 @@
 </script>
 
 <div class="tb-wrap">
-	<div class="tb-banner" bind:this={bannerEl} style:height>
-		<canvas bind:this={canvasEl} class:tb-hidden={!ready}></canvas>
-		<div class="tb-placeholder" class:tb-hide={ready} aria-hidden="true"><div class="tb-shimmer"></div></div>
-		{#if glError}
-			<img class="tb-fallback" src={bgSrc} alt="" />
-		{/if}
-		<div class="tb-vignette"></div>
-		{#if glError}
-			<div class="tb-error">banner failed: {glError}</div>
-		{/if}
-	</div>
+	{#snippet bannerBox()}
+		<div class="tb-banner" bind:this={bannerEl} style:height>
+			<canvas bind:this={canvasEl} class:tb-hidden={!ready}></canvas>
+			<div class="tb-placeholder" class:tb-hide={ready} aria-hidden="true"><div class="tb-shimmer"></div></div>
+			{#if glError}
+				<img class="tb-fallback" src={bgSrc} alt="" />
+			{/if}
+			<div class="tb-vignette"></div>
+			{#if glError}
+				<div class="tb-error">banner failed: {glError}</div>
+			{/if}
+		</div>
+	{/snippet}
+	{#if href}
+		<a class="tb-link" {href} target="_blank" rel="noopener noreferrer" aria-label="Tashio Tempo on Steam">{@render bannerBox()}</a>
+	{:else}
+		{@render bannerBox()}
+	{/if}
 	{#if controls}
 		<div class="tb-controls">
 			<span class="tb-ctl"><label>clouds <input type="range" min="0" max="1.5" step="0.01" value={s.clouds} oninput={(e) => (s.clouds = +e.currentTarget.value)} /></label><b>{s.clouds.toFixed(2)}</b></span>
@@ -691,6 +764,10 @@
 	}
 	.tb-wrap {
 		width: 100%;
+	}
+	.tb-link {
+		display: block;
+		text-decoration: none;
 	}
 	.tb-controls {
 		display: flex;
