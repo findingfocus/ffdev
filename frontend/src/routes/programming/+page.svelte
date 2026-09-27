@@ -70,11 +70,22 @@
     }
 
     import Code from '$lib/components/Code.svelte';
+    import TashioBanner from '$lib/components/TashioBanner.svelte';
     import trattelCode from '$lib/code/trattel.py?raw';
     import sonicPiCode from '$lib/code/sonicPi.rb?raw';
     import artistPrayerCode from '$lib/code/artistPrayer.c?raw';
     let loaded = $state(false);
 </script>
+
+<div class="mb-8 rounded-lg overflow-hidden border-2 border-black">
+    <TashioBanner
+        bgSrc="/banner/volcano.webp"
+        logoSrc="/banner/logo.webp"
+        tashioSrc="/banner/tashio.webp"
+        height="420px"
+        controls
+    />
+</div>
 
 <h2 class="text-xl font-bold mb-2">Saltomanga</h2>
 <p>I developed a website to showcase artwork for <a class="text-cyan-500 hover:text-cyan-400 transition duration-150" href="https://saltomanga.com" target="_blank" rel="noopener noreferrer">Saltomanga</a></p>
