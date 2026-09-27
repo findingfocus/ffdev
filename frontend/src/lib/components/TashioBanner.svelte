@@ -31,6 +31,10 @@
 		cornerDark?: number;
 		luteGlow?: boolean;
 		ashPlume?: boolean;
+		/** bg duotone experiment: 0 off, 1 red, 2 blue, 3 purple */
+		tint?: number;
+		/** duotone strength, 0..1 */
+		tintAmt?: number;
 		/** show the live tuning panel (sliders). Hide for production. */
 		controls?: boolean;
 	}
@@ -53,6 +57,8 @@
 		cornerDark = 0.85,
 		luteGlow = true,
 		ashPlume = true,
+		tint = 3,
+		tintAmt = 0.27,
 		controls = false
 	}: Props = $props();
 
@@ -61,7 +67,7 @@
 	let s = $state({
 		clouds, pixels, crunch, frame, bgDim, swagger,
 		tashioX, tashioSize, cornerX, cornerY, cornerDark,
-		luteGlow, ashPlume
+		luteGlow, ashPlume, tint, tintAmt
 	});
 
 	let bannerEl: HTMLDivElement;
@@ -69,8 +75,8 @@
 	let glError: string | null = $state(null);
 	let ready = $state(false); // all art uploaded -> fade canvas in, fade placeholder out
 	let savedMsg = $state('');
-	const STORE_KEY = 'tashioBanner.settings';
-	const NUM_KEYS = ['clouds', 'pixels', 'crunch', 'frame', 'bgDim', 'swagger', 'tashioX', 'tashioSize', 'cornerX', 'cornerY', 'cornerDark'] as const;
+	const STORE_KEY = 'tashioBanner.settings.v2';
+	const NUM_KEYS = ['clouds', 'pixels', 'crunch', 'frame', 'bgDim', 'swagger', 'tashioX', 'tashioSize', 'cornerX', 'cornerY', 'cornerDark', 'tint', 'tintAmt'] as const;
 
 	function flash(msg: string) {
 		savedMsg = msg;
@@ -107,6 +113,8 @@
 		s.cornerDark = cornerDark;
 		s.luteGlow = luteGlow;
 		s.ashPlume = ashPlume;
+		s.tint = tint;
+		s.tintAmt = tintAmt;
 		flash('reset to props');
 	}
 
@@ -131,6 +139,8 @@
 			`  cornerDark={${s.cornerDark.toFixed(2)}}\n` +
 			`  luteGlow={${s.luteGlow}}\n` +
 			`  ashPlume={${s.ashPlume}}\n` +
+			`  tint={${s.tint.toFixed(0)}}\n` +
+			`  tintAmt={${s.tintAmt.toFixed(2)}}\n` +
 			`/>`;
 		try {
 			await navigator.clipboard.writeText(snippet);
@@ -181,6 +191,7 @@
     uniform vec2 uImgSize;
     uniform float uAspect; // true canvas aspect — keeps cover-fit exact at any buffer size
     uniform float uTime, uParX, uParY, uAmt, uGlowOn, uSmokeOn, uCrunch, uFocus, uBgDim;
+    uniform float uTintMode, uTintAmt; // bg duotone experiment: 0 off, 1 red, 2 blue, 3 purple
     uniform vec2 uSeed;
     ${NOISE}
     void main(){
@@ -256,6 +267,16 @@
       float clouds = (cl*0.65 + cl2*0.35 - 0.5) * sky * (0.15 + uAmt*0.45);
       col *= 1.0 + clouds;
       col += vec3(1.0, 0.85, 0.65) * max(clouds, 0.0) * 0.35;
+
+      // monochromatic duotone experiment (bg only) — posterized by the crunch below
+      if (uTintMode > 0.5) {
+        float tl = clamp(dot(col, vec3(0.299, 0.587, 0.114)), 0.0, 1.0);
+        vec3 tc = uTintMode < 1.5 ? vec3(1.0, 0.22, 0.12)
+                : uTintMode < 2.5 ? vec3(0.25, 0.50, 1.0)
+                :                   vec3(0.62, 0.30, 0.92);
+        vec3 duo = mix(vec3(0.02, 0.01, 0.05), tc, pow(tl, 1.15));
+        col = mix(col, duo, clamp(uTintAmt, 0.0, 1.0));
+      }
 
       // --- bit-crunch: bg only ---
       float lum = dot(col, vec3(0.299, 0.587, 0.114));
@@ -383,9 +404,10 @@
 		img: U(bgProg, 'uImage'), aspect: U(bgProg, 'uAspect'), size: U(bgProg, 'uImgSize'),
 			time: U(bgProg, 'uTime'), px: U(bgProg, 'uParX'), py: U(bgProg, 'uParY'),
 			amt: U(bgProg, 'uAmt'), glow: U(bgProg, 'uGlowOn'), smoke: U(bgProg, 'uSmokeOn'),
-			seed: U(bgProg, 'uSeed'), crunch: U(bgProg, 'uCrunch'),
-			focus: U(bgProg, 'uFocus'), bgdim: U(bgProg, 'uBgDim')
-		};
+		seed: U(bgProg, 'uSeed'), crunch: U(bgProg, 'uCrunch'),
+		focus: U(bgProg, 'uFocus'), bgdim: U(bgProg, 'uBgDim'),
+		tintmode: U(bgProg, 'uTintMode'), tintamt: U(bgProg, 'uTintAmt')
+	};
 		const cu = {
 			bg: U(compProg, 'uBg'), logo: U(compProg, 'uLogo'), tashio: U(compProg, 'uTashio'),
 			res: U(compProg, 'uResolution'), lsize: U(compProg, 'uLogoSize'),
@@ -502,6 +524,7 @@
 			ctx.uniform1f(bu.crunch, s.crunch);
 			ctx.uniform1f(bu.focus, s.frame);
 			ctx.uniform1f(bu.bgdim, s.bgDim);
+			ctx.uniform1f(bu.tintmode, s.tint); ctx.uniform1f(bu.tintamt, s.tintAmt);
 			ctx.uniform2f(bu.seed, seed[0], seed[1]);
 			ctx.drawArrays(ctx.TRIANGLE_STRIP, 0, 4);
 
@@ -570,6 +593,13 @@
 			<span class="tb-ctl"><label>corner dark <input type="range" min="0.4" max="1" step="0.01" value={s.cornerDark} oninput={(e) => (s.cornerDark = +e.currentTarget.value)} /></label><b>{s.cornerDark.toFixed(2)}</b></span>
 			<span class="tb-ctl"><label><input type="checkbox" checked={s.luteGlow} onchange={(e) => (s.luteGlow = e.currentTarget.checked)} /> lute glow</label></span>
 			<span class="tb-ctl"><label><input type="checkbox" checked={s.ashPlume} onchange={(e) => (s.ashPlume = e.currentTarget.checked)} /> ash plume</label></span>
+			<span class="tb-ctl"><label>tint <select value={s.tint} onchange={(e) => (s.tint = +e.currentTarget.value)}>
+				<option value={0}>off</option>
+				<option value={1}>red</option>
+				<option value={2}>blue</option>
+				<option value={3}>purple</option>
+			</select></label></span>
+			<span class="tb-ctl"><label>tint amt <input type="range" min="0" max="1" step="0.01" value={s.tintAmt} oninput={(e) => (s.tintAmt = +e.currentTarget.value)} /></label><b>{s.tintAmt.toFixed(2)}</b></span>
 			<span class="tb-ctl tb-btns">
 				<button type="button" onclick={saveSettings}>save as defaults</button>
 				<button type="button" onclick={resetSettings}>reset</button>
@@ -675,6 +705,14 @@
 	.tb-controls input[type='range'] {
 		width: 110px;
 		accent-color: #e89a39;
+	}
+	.tb-controls select {
+		font: inherit;
+		font-size: 12px;
+		color: #f2e8d8;
+		background: #2a2440;
+		border: 1px solid #4a3f6e;
+		padding: 2px 4px;
 	}
 	.tb-controls b {
 		font-weight: 600;

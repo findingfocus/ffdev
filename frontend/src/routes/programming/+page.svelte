@@ -83,7 +83,6 @@
         logoSrc="/banner/logo.webp"
         tashioSrc="/banner/tashio.webp"
         height="420px"
-        controls
     />
 </div>
 
