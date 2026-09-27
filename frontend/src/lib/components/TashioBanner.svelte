@@ -87,6 +87,13 @@
 			e.preventDefault();
 		}
 	}
+	// motion-arming entry points both funnel here; the pill calls it on demand.
+	let showMotionHint = $state(false);
+	let armMotion: (() => void) | null = null;
+	function retryMotion() {
+		showMotionHint = false;
+		armMotion?.();
+	}
 	const STORE_KEY = 'tashioBanner.settings.v3';
 	const NUM_KEYS = ['clouds', 'pixels', 'crunch', 'frame', 'bgDim', 'swagger', 'tashioX', 'tashioSize', 'cornerX', 'cornerY', 'cornerDark', 'tint', 'tintAmt'] as const;
 
@@ -476,6 +483,7 @@
 		const TILT_RANGE = 20; // degrees of tilt for full deflection
 		const TILT_DEAD = 1.5; // degrees of stillness around level
 		let gyroBase: { x: number; y: number; angle: number } | null = null;
+		let gyroGotData = false;
 		function orientXY(beta: number, gamma: number, angle: number): [number, number] {
 			if (angle === 90) return [beta, -gamma];
 			if (angle === 270) return [-beta, gamma];
@@ -484,6 +492,7 @@
 		}
 		function onTilt(e: DeviceOrientationEvent) {
 			if (e.beta == null || e.gamma == null) return;
+			gyroGotData = true;
 			const angle = (((screen.orientation?.angle ?? 0) % 360) + 360) % 360;
 			const [x, y] = orientXY(e.beta, e.gamma, angle);
 			if (!gyroBase || gyroBase.angle !== angle) {
@@ -511,12 +520,21 @@
 					requestPermission?: () => Promise<string>;
 				};
 				if (typeof doe.requestPermission === 'function') {
-					if ((await doe.requestPermission()) !== 'granted') return;
+					if ((await doe.requestPermission()) !== 'granted') {
+						showMotionHint = true;
+						return;
+					}
 				}
 			} catch {
+				showMotionHint = true;
 				return;
 			}
 			enableGyro();
+			// watchdog: granted but silent usually means the OS-level motion
+			// toggle is off (iOS Settings -> Privacy -> Motion & Orientation).
+			setTimeout(() => {
+				if (!gyroGotData) showMotionHint = true;
+			}, 3500);
 		}
 		if (matchMedia('(pointer: coarse)').matches && typeof DeviceOrientationEvent !== 'undefined') {
 			const doe = DeviceOrientationEvent as unknown as {
@@ -527,6 +545,9 @@
 			if (typeof doe.requestPermission !== 'function') {
 				enableGyro();
 			} else {
+				armMotion = () => {
+					void primeMotion();
+				};
 				let primed = false;
 				const onPointerDown = () => {
 					if (!primed) {
@@ -647,6 +668,7 @@
 			cancelAnimationFrame(raf);
 			banner.removeEventListener('pointermove', onMove);
 			window.removeEventListener('deviceorientation', onTilt);
+			armMotion = null;
 			ctx.getExtension('WEBGL_lose_context')?.loseContext();
 		};
 		} catch (e) {
@@ -671,11 +693,20 @@
 			{/if}
 		</div>
 	{/snippet}
+	<div class="tb-stage">
 	{#if href}
 		<a class="tb-link" {href} aria-label="Tashio Tempo on Steam" onclick={handleLinkClick}>{@render bannerBox()}</a>
 	{:else}
 		{@render bannerBox()}
 	{/if}
+	{#if showMotionHint}
+		<div class="tb-motion-hint" role="status">
+			<span>No motion yet — on iPhone turn on Settings → Privacy → Motion&nbsp;&amp;&nbsp;Orientation</span>
+			<button type="button" onclick={retryMotion}>Try again</button>
+			<button type="button" class="tb-x" onclick={() => (showMotionHint = false)} aria-label="Dismiss">×</button>
+		</div>
+	{/if}
+	</div>
 	{#if controls}
 		<div class="tb-controls">
 			<span class="tb-ctl"><label>clouds <input type="range" min="0" max="1.5" step="0.01" value={s.clouds} oninput={(e) => (s.clouds = +e.currentTarget.value)} /></label><b>{s.clouds.toFixed(2)}</b></span>
@@ -781,6 +812,43 @@
 	}
 	.tb-wrap {
 		width: 100%;
+	}
+	.tb-stage {
+		position: relative;
+	}
+	.tb-motion-hint {
+		position: absolute;
+		left: 50%;
+		bottom: 12px;
+		transform: translateX(-50%);
+		display: flex;
+		gap: 10px;
+		align-items: center;
+		max-width: min(92%, 560px);
+		padding: 8px 12px;
+		font: 12px/1.4 system-ui, sans-serif;
+		color: #f2e8d8;
+		background: rgba(14, 11, 30, 0.92);
+		border: 1px solid #4a3f6e;
+		border-radius: 999px;
+		pointer-events: auto;
+	}
+	.tb-motion-hint button {
+		font: inherit;
+		font-size: 12px;
+		padding: 3px 10px;
+		cursor: pointer;
+		color: #111;
+		background: #e89a39;
+		border: none;
+		border-radius: 999px;
+		white-space: nowrap;
+	}
+	.tb-motion-hint .tb-x {
+		background: transparent;
+		color: #f2e8d8;
+		border: 1px solid #4a3f6e;
+		padding: 0 8px;
 	}
 	.tb-link {
 		display: block;
