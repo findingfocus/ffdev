@@ -78,23 +78,6 @@
 	let glError: string | null = $state(null);
 	let ready = $state(false); // all art uploaded -> fade canvas in, fade placeholder out
 	let savedMsg = $state('');
-	// iOS motion gating for the link wrapper: first tap arms gyro, later taps navigate.
-	let motionPrimed = $state(false);
-	let requestMotion: (() => void) | null = null;
-	function needsMotionPriming(): boolean {
-		if (typeof DeviceOrientationEvent === 'undefined') return false;
-		const doe = DeviceOrientationEvent as unknown as {
-			requestPermission?: () => Promise<string>;
-		};
-		return typeof doe.requestPermission === 'function' && matchMedia('(pointer: coarse)').matches;
-	}
-	function handleLinkClick(e: MouseEvent) {
-		if (!motionPrimed && needsMotionPriming() && requestMotion) {
-			e.preventDefault();
-			motionPrimed = true;
-			requestMotion();
-		}
-	}
 	const STORE_KEY = 'tashioBanner.settings.v3';
 	const NUM_KEYS = ['clouds', 'pixels', 'crunch', 'frame', 'bgDim', 'swagger', 'tashioX', 'tashioSize', 'cornerX', 'cornerY', 'cornerDark', 'tint', 'tintAmt'] as const;
 
@@ -530,13 +513,17 @@
 			const doe = DeviceOrientationEvent as unknown as {
 				requestPermission?: () => Promise<string>;
 			};
-			// Android & co: no permission gate, tilt just works. iOS arms on first link tap.
+			// Android & co: no permission gate, tilt just works. iOS asks on
+			// pointerdown — a valid gesture that never interferes with the
+			// native anchor click, so navigation always works.
 			if (typeof doe.requestPermission !== 'function') {
 				enableGyro();
 			} else {
-				requestMotion = () => {
+				const primeOnce = () => {
+					banner.removeEventListener('pointerdown', primeOnce);
 					void primeMotion();
 				};
+				banner.addEventListener('pointerdown', primeOnce);
 			}
 		} else {
 			console.log('[TashioBanner] gyro skipped, coarse=', matchMedia('(pointer: coarse)').matches);
@@ -673,7 +660,7 @@
 		</div>
 	{/snippet}
 	{#if href}
-		<a class="tb-link" {href} target="_blank" rel="noopener noreferrer" aria-label="Tashio Tempo on Steam" onclick={handleLinkClick}>{@render bannerBox()}</a>
+		<a class="tb-link" {href} target="_blank" rel="noopener noreferrer" aria-label="Tashio Tempo on Steam">{@render bannerBox()}</a>
 	{:else}
 		{@render bannerBox()}
 	{/if}
