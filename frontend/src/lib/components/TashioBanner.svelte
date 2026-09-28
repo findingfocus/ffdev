@@ -22,6 +22,10 @@
 		frame?: number;
 		/** bg darkness, 0.3..1 */
 		bgDim?: number;
+		/** desktop plate zoom; >1 magnifies the bg and creates pan slack */
+		bgZoom?: number;
+		/** leftward bg offset in image-uv units, auto-clamped to the zoom slack */
+		bgPan?: number;
 		/** parallax master, 0..2 */
 		swagger?: number;
 		/** tashio center-x, 0.45..1 */
@@ -33,7 +37,7 @@
 		cornerDark?: number;
 		luteGlow?: boolean;
 		ashPlume?: boolean;
-		/** link the whole banner box out (target _blank, noopener noreferrer). Pass "" to disable. */
+		/** same-tab Steam destination; empty string disables the link */
 		href?: string;
 		/** bg duotone experiment: 0 off, 1 red, 2 blue, 3 purple */
 		tint?: number;
@@ -52,8 +56,10 @@
 		clouds = 0.1,
 		pixels = 4,
 		crunch = 0.29,
-		frame = 0.17,
+		frame = 0.12,
 		bgDim = 0.58,
+		bgZoom = 1.10,
+		bgPan = 0.035,
 		swagger = 1.0,
 		tashioX = 0.72,
 		tashioSize = 1.15,
@@ -71,28 +77,27 @@
 	// Local tunable copy of the props. The render loop reads `s`, so the
 	// panel below can drive the banner live; props act as initial values.
 	let s = $state({
-		clouds, pixels, crunch, frame, bgDim, swagger,
+		clouds, pixels, crunch, frame, bgDim, bgZoom, bgPan, swagger,
 		tashioX, tashioSize, cornerX, cornerY, cornerDark,
 		luteGlow, ashPlume, tint, tintAmt
 	});
 
 	let bannerEl: HTMLDivElement;
 	let canvasEl: HTMLCanvasElement;
+	let coarsePointer = $state(false);
 	let glError: string | null = $state(null);
 	let ready = $state(false); // all art uploaded -> fade canvas in, fade placeholder out
 	let savedMsg = $state('');
-	// first-tap click suppression (iOS): the priming tap stays on the page for
-	// the motion prompt; every later tap navigates natively (same-tab: no blank tab possible).
-	let suppressNextClick = false;
-	function handleLinkClick(e: MouseEvent) {
-		if (suppressNextClick) {
-			suppressNextClick = false;
-			e.preventDefault();
-		}
-	}
 	// motion-arming entry points both funnel here; the pill calls it on demand.
 	let showMotionHint = $state(false);
 	let armMotion: (() => void) | null = null;
+	let suppressNextClick = false;
+	function handleLinkClick(event: MouseEvent) {
+		if (suppressNextClick) {
+			suppressNextClick = false;
+			event.preventDefault();
+		}
+	}
 	function retryMotion() {
 		showMotionHint = false;
 		armMotion?.();
@@ -127,6 +132,8 @@
 		s.crunch = crunch;
 		s.frame = frame;
 		s.bgDim = bgDim;
+		s.bgZoom = bgZoom;
+		s.bgPan = bgPan;
 		s.swagger = swagger;
 		s.tashioX = tashioX;
 		s.tashioSize = tashioSize;
@@ -153,6 +160,8 @@
 			`  crunch={${s.crunch.toFixed(2)}}\n` +
 			`  frame={${s.frame.toFixed(2)}}\n` +
 			`  bgDim={${s.bgDim.toFixed(2)}}\n` +
+			`  bgZoom={${s.bgZoom.toFixed(3)}}\n` +
+			`  bgPan={${s.bgPan.toFixed(3)}}\n` +
 			`  swagger={${s.swagger.toFixed(2)}}\n` +
 			`  tashioX={${s.tashioX.toFixed(2)}}\n` +
 			`  tashioSize={${s.tashioSize.toFixed(2)}}\n` +
@@ -161,7 +170,6 @@
 			`  cornerDark={${s.cornerDark.toFixed(2)}}\n` +
 			`  luteGlow={${s.luteGlow}}\n` +
 			`  ashPlume={${s.ashPlume}}\n` +
-			`  href="${href}"\n` +
 			`  tint={${s.tint.toFixed(0)}}\n` +
 			`  tintAmt={${s.tintAmt.toFixed(2)}}\n` +
 			`/>`;
@@ -173,7 +181,7 @@
 		}
 	}
 
-	const LOGO_POS_X = 0.18;
+	const LOGO_POS_X = 0.20;
 	const LOGO_POS_Y = 0.19;
 	const LOGO_SCALE = 0.34;
 	const TASHIO_POS_Y = 0.45;
@@ -215,15 +223,23 @@
     uniform float uAspect; // true canvas aspect — keeps cover-fit exact at any buffer size
     uniform float uTime, uParX, uParY, uAmt, uGlowOn, uSmokeOn, uCrunch, uFocus, uBgDim;
     uniform float uTintMode, uTintAmt; // bg duotone experiment: 0 off, 1 red, 2 blue, 3 purple
+    uniform float uBgZoom, uBgPan; // desktop plate zoom + leftward offset
     uniform vec2 uSeed;
     ${NOISE}
     void main(){
       float t = uTime;
       float ca = uAspect;
       float ia = uImgSize.x / max(uImgSize.y,1.0);
+      // Zoom first: cover-fit alone consumes the plate's full width, so a pan
+      // would sample past the edge and smear. Zooming creates slack, and the pan
+      // is clamped to that slack so it can never run off at any slider value.
+      float fit = smoothstep(0.9, 1.35, ca);      // 0 on phones, 1 on desktop
+      float z = 1.0 + (uBgZoom - 1.0) * fit;
+      float slack = 0.5 * (1.0 - 1.0 / max(z, 1.0));
+      float pan = clamp(uBgPan * fit, -slack, slack);
       vec2 cuv;
-      if (ca > ia) cuv = vec2(vUv.x, (vUv.y-0.5)*(ia/ca)+0.5+uFocus);
-      else cuv = vec2((vUv.x-0.5)*(ca/ia)+0.5, vUv.y);
+      if (ca > ia) cuv = vec2((vUv.x-0.5)/z + 0.5 + pan, (vUv.y-0.5)*(ia/ca)/z + 0.5+uFocus);
+      else cuv = vec2((vUv.x-0.5)*(ca/ia)/z + 0.5 + pan, (vUv.y-0.5)/z + 0.5);
 
       vec2 imgUV = cuv + vec2(uParX*0.015, uParY*0.015);
       vec3 tex = texture2D(uImage, imgUV).rgb * uBgDim;
@@ -249,7 +265,7 @@
 
       // daytime eruption plume (crater ~0.52, ~0.79, v=1 top)
       if (uSmokeOn > 0.5) {
-        vec2 mouth = vec2(0.529, 0.80);
+        vec2 mouth = vec2(0.535, 0.79);
         float flick = 0.62 + 0.24*sin(t*7.0) + 0.14*sin(t*13.7+1.3);
         float h = imgUV.y - mouth.y;
         float colX = mouth.x + h*0.35 + 0.008*sin(t*0.9 + imgUV.y*14.0);
@@ -378,8 +394,12 @@
       float corner = (1.0 - smoothstep(0.0, uCorner.x, vUv.x)) * (1.0 - smoothstep(0.0, uCorner.y, vUv.y));
       col = mix(col, vec3(0.0), corner*uCorner.z);
 
-      // logo LAST: always front, crisp, untouched by scene lighting
-      vec4 lg = sampleLayer(uLogo, uLogoSize, logoPosEff, logoScaleEff, vec2(0.0, 0.0));
+      // logo LAST: always front, crisp, untouched by scene lighting.
+      // Clamp so the lockup can never run off the left edge on narrow banners.
+      float logoHalfW = logoScaleEff * (uLogoSize.x / max(uLogoSize.y, 1.0)) / ca * 0.5;
+      float logoCx = max(logoPosEff.x, logoHalfW + 0.015);
+      vec2 lgPos = vec2(logoCx, logoPosEff.y);
+      vec4 lg = sampleLayer(uLogo, uLogoSize, lgPos, logoScaleEff, vec2(0.0, 0.0));
       col = mix(col, lg.rgb, lg.a);
 
       gl_FragColor = vec4(col, 1.0);
@@ -388,6 +408,7 @@
 	onMount(() => {
 		const canvas = canvasEl;
 		const banner = bannerEl;
+		coarsePointer = matchMedia('(pointer: coarse)').matches;
 		// restore previously saved defaults (panel -> save as defaults)
 		try {
 			const raw = localStorage.getItem(STORE_KEY);
@@ -439,7 +460,8 @@
 			amt: U(bgProg, 'uAmt'), glow: U(bgProg, 'uGlowOn'), smoke: U(bgProg, 'uSmokeOn'),
 		seed: U(bgProg, 'uSeed'), crunch: U(bgProg, 'uCrunch'),
 		focus: U(bgProg, 'uFocus'), bgdim: U(bgProg, 'uBgDim'),
-		tintmode: U(bgProg, 'uTintMode'), tintamt: U(bgProg, 'uTintAmt')
+		tintmode: U(bgProg, 'uTintMode'), tintamt: U(bgProg, 'uTintAmt'),
+		bgzoom: U(bgProg, 'uBgZoom'), bgpan: U(bgProg, 'uBgPan'),
 	};
 		const cu = {
 			bg: U(compProg, 'uBg'), logo: U(compProg, 'uLogo'), tashio: U(compProg, 'uTashio'),
@@ -559,8 +581,6 @@
 						primed = true;
 						suppressNextClick = true;
 						void primeMotion();
-					} else {
-						suppressNextClick = false;
 					}
 				};
 				banner.addEventListener('pointerdown', onPointerDown);
@@ -642,6 +662,7 @@
 			ctx.uniform1f(bu.focus, s.frame);
 			ctx.uniform1f(bu.bgdim, s.bgDim);
 			ctx.uniform1f(bu.tintmode, s.tint); ctx.uniform1f(bu.tintamt, s.tintAmt);
+			ctx.uniform1f(bu.bgzoom, s.bgZoom); ctx.uniform1f(bu.bgpan, s.bgPan);
 			ctx.uniform2f(bu.seed, seed[0], seed[1]);
 			ctx.drawArrays(ctx.TRIANGLE_STRIP, 0, 4);
 
@@ -701,7 +722,15 @@
 	{/snippet}
 	<div class="tb-stage">
 	{#if href}
-		<a class="tb-link" {href} aria-label="Tashio Tempo on Steam" onclick={handleLinkClick}>{@render bannerBox()}</a>
+		<a
+			class="tb-link"
+			{href}
+			target={coarsePointer ? undefined : '_blank'}
+			rel={coarsePointer ? undefined : 'noopener noreferrer'}
+			aria-label="Tashio Tempo on Steam"
+			onclick={handleLinkClick}
+			>{@render bannerBox()}</a
+		>
 	{:else}
 		{@render bannerBox()}
 	{/if}
@@ -720,6 +749,8 @@
 			<span class="tb-ctl"><label>crunch <input type="range" min="0" max="1" step="0.01" value={s.crunch} oninput={(e) => (s.crunch = +e.currentTarget.value)} /></label><b>{s.crunch.toFixed(2)}</b></span>
 			<span class="tb-ctl"><label>frame <input type="range" min="0" max="0.25" step="0.01" value={s.frame} oninput={(e) => (s.frame = +e.currentTarget.value)} /></label><b>{s.frame.toFixed(2)}</b></span>
 			<span class="tb-ctl"><label>bg <input type="range" min="0.3" max="1" step="0.01" value={s.bgDim} oninput={(e) => (s.bgDim = +e.currentTarget.value)} /></label><b>{s.bgDim.toFixed(2)}</b></span>
+			<span class="tb-ctl"><label>bg zoom <input type="range" min="1" max="1.6" step="0.01" value={s.bgZoom} oninput={(e) => (s.bgZoom = +e.currentTarget.value)} /></label><b>{s.bgZoom.toFixed(2)}</b></span>
+			<span class="tb-ctl"><label>bg pan <input type="range" min="-0.1" max="0.1" step="0.002" value={s.bgPan} oninput={(e) => (s.bgPan = +e.currentTarget.value)} /></label><b>{s.bgPan.toFixed(3)}</b></span>
 			<span class="tb-ctl"><label>swagger <input type="range" min="0" max="2" step="0.01" value={s.swagger} oninput={(e) => (s.swagger = +e.currentTarget.value)} /></label><b>{s.swagger.toFixed(2)}</b></span>
 			<span class="tb-ctl"><label>tashio x <input type="range" min="0.45" max="1" step="0.01" value={s.tashioX} oninput={(e) => (s.tashioX = +e.currentTarget.value)} /></label><b>{s.tashioX.toFixed(2)}</b></span>
 			<span class="tb-ctl"><label>tashio size <input type="range" min="0.8" max="1.5" step="0.01" value={s.tashioSize} oninput={(e) => (s.tashioSize = +e.currentTarget.value)} /></label><b>{s.tashioSize.toFixed(2)}</b></span>
@@ -828,21 +859,48 @@
 		bottom: 12px;
 		transform: translateX(-50%);
 		display: flex;
-		gap: 10px;
+		flex-wrap: wrap;
 		align-items: center;
-		max-width: min(92%, 560px);
-		padding: 8px 12px;
-		font: 12px/1.4 system-ui, sans-serif;
+		justify-content: center;
+		gap: 8px 10px;
+		width: max-content;
+		max-width: min(92%, 400px);
+		padding: 10px 14px;
+		font: 12px/1.45 system-ui, sans-serif;
 		color: #f2e8d8;
-		background: rgba(14, 11, 30, 0.92);
+		background: rgba(14, 11, 30, 0.94);
 		border: 1px solid #4a3f6e;
-		border-radius: 999px;
+		border-radius: 14px;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 		pointer-events: auto;
 	}
+	/* keep the sentence on its own full-width row so it never collapses to a sliver */
+	.tb-motion-hint span {
+		flex: 1 1 200px;
+		min-width: 0;
+		text-align: center;
+	}
+	@media (max-width: 480px) {
+		.tb-motion-hint {
+			left: 8px;
+			right: 8px;
+			bottom: 10px;
+			transform: none;
+			width: auto;
+			max-width: none;
+			border-radius: 12px;
+			padding: 10px 12px;
+		}
+		.tb-motion-hint span {
+			flex: 1 1 100%;
+			text-align: left;
+		}
+	}
 	.tb-motion-hint button {
+		flex: 0 0 auto;
 		font: inherit;
 		font-size: 12px;
-		padding: 3px 10px;
+		padding: 4px 12px;
 		cursor: pointer;
 		color: #111;
 		background: #e89a39;
@@ -855,10 +913,6 @@
 		color: #f2e8d8;
 		border: 1px solid #4a3f6e;
 		padding: 0 8px;
-	}
-	.tb-link {
-		display: block;
-		text-decoration: none;
 	}
 	.tb-controls {
 		display: flex;
